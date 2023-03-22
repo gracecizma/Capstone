@@ -15,6 +15,7 @@ class Order(db.Model):
 
     user = db.relationship("User", back_populates="orders")
     products = db.relationship("Product", back_populates="orders")
+    order_product = db.relationship("OrderProduct", back_populates="order")
 
     def to_dict(self):
         return {

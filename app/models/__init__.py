@@ -6,4 +6,4 @@ from .order import Order
 from .product_image import Image
 from .products import Product
 from .reviews import Review
-from .shopping_cart import CartItem
+from .cart_item import CartItem

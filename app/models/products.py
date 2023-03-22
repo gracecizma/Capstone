@@ -19,8 +19,9 @@ class Product(db.Model):
 
     images = db.relationship('Image', back_populates='product')
     cart_item = db.relationship("ShoppingCart", back_populates='product')
-    orders = db.relationship("Order", back_populates='products')
+    order_product = db.relationship("OrderProduct", back_populates='product')
     reviews = db.relationship("Review", back_populates="product")
+    favorite = db.relationship("Favorite", back_populates="product")
 
     def avg_rating(self):
         if len(self.reviews) == 0:

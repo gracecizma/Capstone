@@ -11,15 +11,16 @@ class OrderProduct(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("orders.id")), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("products.id")), nullable=False
-        quantity=db.Column(db.Integer, nullable=False)
+        add_prefix_for_prod("products.id")), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
 
-        def to_dict(self):
+    order = db.relationship("Order", back_populates="order_product")
+    product = db.relationship("Product", back_populates="order_product")
+
+    def to_dict(self):
         return {
-        "id": self.id,
-        "order_id": self.order_id,
-        "product_id": self.product_id,
-        "quantity": self.quantity
-    }
-
-    )
+            "id": self.id,
+            "order_id": self.order_id,
+            "product_id": self.product_id,
+            "quantity": self.quantity
+        }

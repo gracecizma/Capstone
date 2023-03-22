@@ -18,6 +18,7 @@ class Review(db.Model):
     stars = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
+
     product = db.relationship("Product", back_populates="reviews")
     author = db.relationship("User", back_populates="reviews")
 
