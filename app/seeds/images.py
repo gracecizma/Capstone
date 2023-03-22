@@ -12,25 +12,27 @@ imgList = [
 
 
 def seed_images():
-    for i in range(10):
+    for i in range(7):
         image = Image(
             url=imgList[randint(0, len(imgList)-1)],
             preview=True,
             product_id=i+1
         )
         db.session.add(image)
-    for i in range(10):
+    for i in range(7):
         image = Image(
             url=imgList[randint(0, len(imgList)-1)],
             preview=False,
-            product_id=randint(1, 10)
+            product_id=randint(1, 7)
         )
         db.session.add(image)
     db.session.commit()
 
+
 def undo_images():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.images RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.images RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM images"))
 
