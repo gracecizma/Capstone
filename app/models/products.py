@@ -16,9 +16,10 @@ class Product(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False)
     seller_id = db.Column(db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
+    stock = db.Column(db.Integer, nullable=False)
 
     images = db.relationship('Image', back_populates='product')
-    cart_item = db.relationship("ShoppingCart", back_populates='product')
+    cart_item = db.relationship("CartItem", back_populates='product')
     order_product = db.relationship("OrderProduct", back_populates='product')
     reviews = db.relationship("Review", back_populates="product")
     favorite = db.relationship("Favorite", back_populates="product")
