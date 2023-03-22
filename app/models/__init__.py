@@ -1,4 +1,4 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .user import User
 from .favorites import Favorite
 from .order_products import OrderProduct
