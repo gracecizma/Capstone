@@ -18,7 +18,7 @@ class Product(db.Model):
         add_prefix_for_prod('users.id')), nullable=False)
 
     images = db.relationship('Image', back_populates='product')
-    cart_item = db.relationship("ShoppingCart", back_populates='product')
+    cart_item = db.relationship("CartItem", back_populates='product')
     order_product = db.relationship("OrderProduct", back_populates='product')
     reviews = db.relationship("Review", back_populates="product")
     favorite = db.relationship("Favorite", back_populates="product")

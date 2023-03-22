@@ -14,7 +14,6 @@ class Order(db.Model):
     date = db.Column(db.Date, nullable=False)
 
     user = db.relationship("User", back_populates="orders")
-    products = db.relationship("Product", back_populates="orders")
     order_product = db.relationship("OrderProduct", back_populates="order")
 
     def to_dict(self):
