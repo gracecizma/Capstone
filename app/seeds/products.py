@@ -7,25 +7,25 @@ from datetime import datetime
 def seed_products():
     users = User.query.all()
     chocolate_chip = Product(
-        name="Chocolate Chip Cookie", description="filler text", price=20, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id
+        name="Chocolate Chip Cookie", description="filler text", price=20, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id, image_url="https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg"
     )
     oatmeal = Product(
-        name="Oatmeal Cinnamon Cookie", description="filler text", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id
+        name="Oatmeal Cinnamon Cookie", description="filler text", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id, image_url="https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg"
     )
     cranberry = Product(
-        name="Cranberry Orange Cookie", description="filler text", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id
+        name="Cranberry Orange Cookie", description="filler text", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id, image_url="https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg"
     )
     pb_chocolate = Product(
-        name="Peanut Butter Chocolate Cookie", description="filler text", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id
+        name="Peanut Butter Chocolate Cookie", description="filler text", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id, image_url="https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg"
     )
     smores = Product(
-        name="Smores Cookie", description="filler text", price=16, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id
+        name="Smores Cookie", description="filler text", price=16, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id, image_url="https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg"
     )
     bagel = Product(
-        name="Bagel", description="filler text", price=15, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id
+        name="Bagel", description="filler text", price=15, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id, image_url="https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg"
     )
     bread = Product(
-        name="Bread", description="filler text", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id
+        name="Bread", description="filler text", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=users[randint(1, 3)].id, image_url="https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg"
     )
 
     db.session.add(chocolate_chip)

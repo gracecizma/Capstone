@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import Product, db, Image, User
-from app.forms import ProductForm
+from app.forms import ProductForm, ImageForm
 from flask_login import current_user
 from datetime import datetime
 
@@ -30,7 +30,7 @@ def get_products_by_seller():
     seller_id = id
     products = Product.query.filter_by(seller_id).all()
     seller = User.query.get(id)
-    return {'products': [products.to_dict() for product in products], 'seller': seller.to_dict()}
+    return {'products': [product.to_dict() for product in products], 'seller': seller.to_dict()}
 
 
 # Delete a product
@@ -41,6 +41,32 @@ def delete_product(id):
         db.session.delete(product)
         db.session.commit()
         return {'message': 'Product deleted'}
+    return {'errors': 'Unauthorized'}, 403
+
+
+#  Create a product
+@product_routes.route('/', methods=['POST'])
+def create_product():
+    form = ProductForm()
+    if current_user.is_authenticated:
+        user = current_user.to_dict()
+        seller_id = user['id']
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            product = Product(
+                name=form.data['name'],
+                description=form.data['description'],
+                price=form.data['price'],
+                quantity=form.data['quantity'],
+                seller_id=seller_id,
+                image_url=form.data['image_url'],
+                created_at=datetime.utcnow(),
+                updated_at=datetime.utcnow(),
+            )
+            db.session.add(product)
+            db.session.commit()
+            return product.to_dict()
+        return {'errors': form.errors}, 401
     return {'errors': 'Unauthorized'}, 403
 
 
@@ -65,12 +91,3 @@ def update_product(id):
             return product.to_dict()
         return {'errors': form.errors}, 401
     return {'errors': 'Unauthorized'}, 403
-
-
-# # Get single product image
-# @product_routes.route('/<int:id>')
-# def get_product_image(id):
-#     product = Product.query.get(id)
-#     product_id = product.id
-#     images = Image.query.filter_by(product_id).all()
-#     return {'images': [image.to_dict() for image in images]}

@@ -21,7 +21,7 @@ def seed():
         undo_users()
     seed_users()
     seed_products()
-    seed_images()
+    # seed_images()
     # Add other seed functions here
 
 
@@ -30,5 +30,5 @@ def seed():
 def undo():
     undo_users()
     undo_products()
-    undo_images()
+    # undo_images()
     # Add other undo functions here

@@ -20,6 +20,7 @@ class CartItem(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+            "product_id": self.product_id,
             "user_id": self.user_id,
             "quantity": self.quantity
         }

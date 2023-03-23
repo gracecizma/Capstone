@@ -1,3 +1,4 @@
 from .login_form import LoginForm
 from .signup_form import SignUpForm
 from .product import ProductForm
+from .image import ImageForm

@@ -10,14 +10,14 @@ class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(255))
     preview = db.Column(db.Boolean(), nullable=False)
-    product_id = db.Column(db.ForeignKey(add_prefix_for_prod('products.id')))
+    # product_id = db.Column(db.ForeignKey(add_prefix_for_prod('products.id')))
 
-    product = db.relationship('Product', back_populates='images')
+    # product = db.relationship('Product', back_populates='images')
 
     def to_dict(self):
         return {
             'id': self.id,
             'url': self.url,
-            'product_id': self.product_id,
+            # 'product_id': self.product_id,
             'preview': self.preview
         }
