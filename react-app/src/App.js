@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Products from "./components/Products/AllProducts"
+import SingleProduct from "./components/Products/SingleProduct";
 import SplashPage from "./components/SplashPage/SplashPage"
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/products/:id">
+            <SingleProduct />
           </Route>
           <Route path="/products">
             <Products />

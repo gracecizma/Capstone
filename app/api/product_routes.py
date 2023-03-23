@@ -16,7 +16,7 @@ def get_all_products():
 
 # Get a single product
 @product_routes.route('/<int:id>')
-def get_one_product():
+def get_one_product(id):
     product = Product.query.get(id)
     seller = User.query.get(product.seller_id)
     product_obj = product.to_dict()
