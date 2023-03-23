@@ -75,6 +75,7 @@ export const getSingleProduct = (id) => async (dispatch) => {
 
   if (res.ok) {
     const product = await res.json()
+    console.log("single product fetch", product)
 
     dispatch(loadSingleProduct(product))
   }
