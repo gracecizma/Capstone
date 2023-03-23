@@ -58,8 +58,14 @@ export const getAllProducts = () => async (dispatch) => {
 
   if (res.ok) {
     const products = await res.json()
+    console.log("all products fetch", products)
+    let normalizedObj = {}
+    products.products.forEach((product) => {
+      normalizedObj[product.id] = product
+    })
+    console.log("normalized product obj", normalizedObj)
 
-    dispatch(loadProducts(products))
+    dispatch(loadProducts(normalizedObj))
   }
 };
 
@@ -80,6 +86,7 @@ export const getUserProducts = (id) => async (dispatch) => {
 
   if (res.ok) {
     const products = await res.json()
+
 
     dispatch(loadProductsByUser(products))
   }
@@ -115,7 +122,7 @@ export const updateProduct = (id) => async (dispatch) => {
   const res = await fetch(`/api/products/${id}`, {
     method: 'PUT',
     headers: { "content-Type": "application/json" },
-    body: JSON.stringify(product)
+    body: JSON.stringify(id)
   })
 
   if (res.ok) {
