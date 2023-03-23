@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
 import { getAllProducts } from "../../store/products";
+import "./allproducts.css"
 
 export default function Products() {
   const dispatch = useDispatch()
@@ -18,22 +19,24 @@ export default function Products() {
 
   return (
     <>
-      <div>
+      <div className="products-div">
         {productsArr.map(product => (
-          <Link key={product.id} to={`products/${product.id}`} className="product-tile">
-            <div>
-              <img src={product.image_url} />
+          <Link key={product.id} to={`/products/${product.id}`} className="product-tile">
+            <div className="product-img-container">
+              <img
+                className="product-img"
+                src={product.image_url} />
             </div>
 
-            <div>
-              <div>
-                <p>
+            <div className="product-details-container">
+              <div className="product-name-rating-price">
+                <p className="product-name">
                   {product.name}
                 </p>
-                <p>
-                  {product.avg_rating}
+                <p className="product-rating">
+                  Rating:{product.avg_rating ? ' ★ ' + Number(product.avg_rating).toFixed(1) : '★ New'}
                 </p>
-                <p>
+                <p className="product-price">
                   ${product.price}
                 </p>
               </div>
