@@ -16,8 +16,10 @@ class Product(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False)
     seller_id = db.Column(db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
+    image_url = db.Column(db.String(1000), nullable=False)
 
-    images = db.relationship('Image', back_populates='product')
+
+    # images = db.relationship('Image', back_populates='product')
     cart_item = db.relationship("CartItem", back_populates='product')
     order_product = db.relationship("OrderProduct", back_populates='product')
     reviews = db.relationship("Review", back_populates="product")
@@ -37,8 +39,8 @@ class Product(db.Model):
             'quantity': self.quantity,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'images': [image.to_dict() for image in self.images],
             'seller_id': self.seller_id,
+            'image_url': self.image_url,
             'avg_rating': self.avg_rating(),
             'total_reviews': len(self.reviews)
         }

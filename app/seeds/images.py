@@ -19,14 +19,7 @@ def seed_images():
             product_id=i+1
         )
         db.session.add(image)
-    for i in range(7):
-        image = Image(
-            url=imgList[randint(0, len(imgList)-1)],
-            preview=False,
-            product_id=randint(1, 7)
-        )
-        db.session.add(image)
-    db.session.commit()
+        db.session.commit()
 
 
 def undo_images():

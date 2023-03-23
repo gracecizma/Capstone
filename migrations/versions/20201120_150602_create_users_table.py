@@ -45,19 +45,21 @@ def upgrade():
                     sa.Column('created_at', sa.DateTime(), nullable=False),
                     sa.Column('updated_at', sa.DateTime(), nullable=False),
                     sa.Column('seller_id', sa.Integer(), nullable=False),
+                    sa.Column('image_url', sa.String(
+                        length=1000), nullable=False),
                     sa.ForeignKeyConstraint(['seller_id'], ['users.id'], ),
                     sa.PrimaryKeyConstraint('id')
                     )
 
     # Images table
-    op.create_table('images',
-                    sa.Column('id', sa.Integer(), nullable=False),
-                    sa.Column('url', sa.String(length=255), nullable=False),
-                    sa.Column('preview', sa.Boolean(), nullable=False),
-                    sa.Column('product_id', sa.Integer()),
-                    sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
-                    sa.PrimaryKeyConstraint('id')
-                    )
+    # op.create_table('images',
+    #                 sa.Column('id', sa.Integer(), nullable=False),
+    #                 sa.Column('url', sa.String(length=255), nullable=False),
+    #                 sa.Column('preview', sa.Boolean(), nullable=False),
+    #                 sa.Column('product_id', sa.Integer()),
+    #                 sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
+    #                 sa.PrimaryKeyConstraint('id')
+    #                 )
 
     # reviews table
     op.create_table('reviews',
