@@ -9,8 +9,6 @@
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  border: solid purple 2px;
-  box-shadow: 5px 2px 2px #de6df4;
   border-radius: 10px;
   border: solid 1px #f9f0fb;
   background-color: white;
@@ -80,7 +78,6 @@
 
 
 .logout-button {
-  background-color: #ac5ebc;
   border-radius: 5px;
 }
 
