@@ -41,24 +41,28 @@
 .header {
   display: flex;
   align-items: center;
-  font-family: apple-chancery;
-
+  flex-direction: column;
 }
 
-.logo-text {
+.logo-text-one {
+  text-decoration: none;
+  color: white;
+}
+
+.logo-text-two {
   text-decoration: none;
   color: white;
 }
 
 .nav-bar-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  width: 300px
 }
 
 .create-new-link {
   color: white;
-  font-family: apple-chancery;
   padding: 5px;
 }
 
@@ -95,4 +99,12 @@
 .menu-login-button:hover,
 .menu-signup-button:hover {
   cursor: pointer;
+}
+
+
+.nav-links {
+  display: flex;
+  width: 150px;
+  flex-direction: row;
+  justify-content: space-between;
 }
