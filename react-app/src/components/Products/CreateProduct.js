@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewProduct } from "../../store/products";
+import "./createproduct.css"
 
 
 export default function CreateProduct() {
@@ -44,7 +45,7 @@ export default function CreateProduct() {
         "name": name,
         "description": description,
         "price": parseFloat(price),
-        "quantity": quantity,
+        "quantity": parseFloat(quantity),
         "seller_id": currUser.id,
         "image_url": imageUrl
       }
@@ -133,7 +134,7 @@ export default function CreateProduct() {
                 type="submit"
                 className="submit-button"
               >
-                Create Item
+                Create
               </button>
             </div>
           </form>

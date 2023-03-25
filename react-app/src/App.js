@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
@@ -10,12 +10,11 @@ import SingleProduct from "./components/Products/SingleProduct";
 import SplashPage from "./components/SplashPage/SplashPage"
 import Profile from "./components/UserProfile"
 import CreateProduct from "./components/Products/CreateProduct";
+import UpdateProduct from "./components/Products/UpdateProduct";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const user = useSelector(state => state?.session?.user);
 
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
@@ -32,11 +31,14 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path={`/users/profile/${user?.id}`}>
+          <Route path="/users/profile/:id">
             <Profile />
           </Route>
           <Route path="/products/new">
             <CreateProduct />
+          </Route>
+          <Route path="/products/:id/edit">
+            <UpdateProduct />
           </Route>
           <Route path="/products/:id">
             <SingleProduct />

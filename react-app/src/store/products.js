@@ -29,10 +29,10 @@ const loadProductsByUser = (products) => {
   }
 }
 
-const removeProduct = (product) => {
+const removeProduct = (productId) => {
   return {
     type: REMOVE_PRODUCT,
-    payload: product
+    payload: productId
   }
 };
 
@@ -84,29 +84,30 @@ export const getSingleProduct = (id) => async (dispatch) => {
 
 export const getUserProducts = (id) => async (dispatch) => {
   const res = await fetch(`/api/users/profile/${id}`)
-  console.log("user products res", res)
 
   if (res.ok) {
     const products = await res.json()
-    console.log("user products fetch", products)
 
     let productsObj = {}
     products.products.forEach((product) => {
       productsObj[product.id] = product
     })
 
+    console.log("user products obj", productsObj)
     dispatch(loadProductsByUser(productsObj))
   }
 };
 
 export const deleteProduct = (id) => async (dispatch) => {
-  const res = await fetch(`/api/products/${id}}`, {
-    method: "DELETE"
+  const res = await fetch(`/api/users/profile/${id}}`, {
+    method: "DELETE",
+    headers: { 'Content-Type': 'application/json' }
   });
 
   if (res.ok) {
     const product = await res.json();
-    dispatch(removeProduct(product));
+    dispatch(removeProduct(product.id));
+    dispatch(getUserProducts(product.seller_id))
   }
 };
 
