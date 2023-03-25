@@ -28,15 +28,17 @@
   height: 65px;
   width: 100%;
   text-decoration: none;
-  background-color: grey;
+  background-color: #8d6232;
   position: sticky;
 }
 
-.home {
-  display: flex;
-  align-items: center;
+.home-link,
+.menu-link,
+.about-link {
+  text-decoration: none;
   color: white;
 }
+
 
 .header {
   display: flex;
@@ -44,15 +46,12 @@
   flex-direction: column;
 }
 
-.logo-text-one {
-  text-decoration: none;
-  color: white;
-}
-
+.logo-text-one,
 .logo-text-two {
   text-decoration: none;
   color: white;
 }
+
 
 .nav-bar-buttons {
   display: flex;
@@ -61,10 +60,6 @@
   width: 300px
 }
 
-.create-new-link {
-  color: white;
-  padding: 5px;
-}
 
 .user-menu-button {
   display: flex;
