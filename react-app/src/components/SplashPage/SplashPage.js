@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { render } from "react-dom";
+import React from "react";
 import "./splashpage.css"
 
 export default function SplashPage() {

@@ -26,8 +26,8 @@ function Navigation({ isLoaded }) {
 					<div className="menu">
 						<NavLink exact to="/products" className="menu-link">Menu</NavLink>
 					</div>
-					<div className="about">
-						<NavLink exact to="/" className="about-link">About</NavLink>
+					<div className="FAQ">
+						<NavLink exact to="/faqs" className="faq-link">FAQs</NavLink>
 					</div>
 					<div className="profile">
 						<NavLink to={`/users/profile/${sessionUser?.id}`} className="profile-link">Profile</NavLink>

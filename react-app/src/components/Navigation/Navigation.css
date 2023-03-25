@@ -41,7 +41,7 @@
 
 .home-link,
 .menu-link,
-.about-link,
+.faq-link,
 .profile-link {
   text-decoration: none;
   color: #e8dfd8;
@@ -60,6 +60,19 @@
   color: #e8dfd8;
 }
 
+.search-container {
+  display: flex;
+  height: 40px;
+}
+
+.search-form {
+  display: flex;
+  height: 100%;
+}
+
+.search-form-input {
+  border-radius: 15px;
+}
 
 .nav-bar-buttons {
   display: flex;
