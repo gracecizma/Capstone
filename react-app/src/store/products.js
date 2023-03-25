@@ -83,13 +83,19 @@ export const getSingleProduct = (id) => async (dispatch) => {
 
 
 export const getUserProducts = (id) => async (dispatch) => {
-  const res = await fetch(`/api/products/seller/${id}`)
+  const res = await fetch(`/api/users/profile/${id}`)
+  console.log("user products res", res)
 
   if (res.ok) {
     const products = await res.json()
+    console.log("user products fetch", products)
 
+    let productsObj = {}
+    products.products.forEach((product) => {
+      productsObj[product.id] = product
+    })
 
-    dispatch(loadProductsByUser(products))
+    dispatch(loadProductsByUser(productsObj))
   }
 };
 
@@ -105,7 +111,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 };
 
 export const createNewProduct = (newProduct) => async (dispatch) => {
-  const res = await fetch(`/api/products`, {
+  const res = await fetch(`/api/products/new`, {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newProduct)
@@ -152,6 +158,7 @@ export default function productsReducer(state = initialState, action) {
     }
     case GET_PRODUCTS_BY_USER: {
       const userState = { ...state, allProducts: { ...state.allProducts }, singleProduct: {}, userProducts: {} }
+      console.log("user state", userState)
       userState.userProducts = action.payload
       return userState
     }

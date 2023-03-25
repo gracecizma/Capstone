@@ -5,11 +5,16 @@ import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
-	const sessionUser = useSelector(state => state.session.user);
+	const sessionUser = useSelector(state => state?.session?.user);
 
 	const history = useHistory();
 
 	const [search, setSearch] = useState("");
+
+	// const profileHandler = (e) => {
+	// 	e.preventDefault();
+	// 	history.push(`/sessionUser/${sessionUser.id}`);
+	// };
 
 	return (
 		<>
@@ -23,6 +28,9 @@ function Navigation({ isLoaded }) {
 					</div>
 					<div className="about">
 						<NavLink exact to="/" className="about-link">About</NavLink>
+					</div>
+					<div>
+						<NavLink to={`/users/profile/${sessionUser?.id}`}>Profile</NavLink>
 					</div>
 				</div>
 				<div className="header">
