@@ -11,9 +11,9 @@ function Navigation({ isLoaded }) {
 
 	const [search, setSearch] = useState("");
 
-	// const profileHandler = (e) => {
+	// const cartHandler = (e) => {
 	// 	e.preventDefault();
-	// 	history.push(`/sessionUser/${sessionUser.id}`);
+	// 	history.push(`/shopping-cart/`);
 	// };
 
 	return (
@@ -29,8 +29,8 @@ function Navigation({ isLoaded }) {
 					<div className="about">
 						<NavLink exact to="/" className="about-link">About</NavLink>
 					</div>
-					<div>
-						<NavLink to={`/users/profile/${sessionUser?.id}`}>Profile</NavLink>
+					<div className="profile">
+						<NavLink to={`/users/profile/${sessionUser?.id}`} className="profile-link">Profile</NavLink>
 					</div>
 				</div>
 				<div className="header">
@@ -59,8 +59,8 @@ function Navigation({ isLoaded }) {
 							<ProfileButton user={sessionUser} />
 						</div>
 						<div className="cart-box">
-							<NavLink exact to="/shopping-cart">
-								<i className="fas fa-shopping-cart fa-lg"></i>
+							<NavLink exact to="/shopping-cart" className="cart-icon">
+								<i className="fas fa-shopping-cart fa-lg" style={{ color: "#e8dfd8" }}></i>
 							</NavLink>
 						</div>
 
