@@ -9,6 +9,7 @@ import Products from "./components/Products/AllProducts"
 import SingleProduct from "./components/Products/SingleProduct";
 import SplashPage from "./components/SplashPage/SplashPage"
 import Profile from "./components/UserProfile"
+import CreateProduct from "./components/Products/CreateProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,11 +35,20 @@ function App() {
           <Route path={`/users/profile/${user.id}`}>
             <Profile />
           </Route>
+          <Route path="/products/new">
+            <CreateProduct />
+          </Route>
           <Route path="/products/:id">
             <SingleProduct />
           </Route>
           <Route path="/products">
             <Products />
+          </Route>
+          <Route path="/shopping-cart">
+            <h1>Shopping cart coming soon</h1>
+          </Route>
+          <Route path="/faqs">
+            <h1>FAQ page coming soon</h1>
           </Route>
           <Route path="/">
             <SplashPage />

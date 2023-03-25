@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Link } from "react-router-dom";
-import { deleteProduct, getUserProducts } from "../../store/products";
-import { loadUsers } from "../../store/session";
+import { Link } from "react-router-dom";
+import { getUserProducts } from "../../store/products";
 import "./profile.css";
 
 
@@ -17,7 +16,7 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(getUserProducts(currUser.id))
-  }, [dispatch])
+  }, [dispatch, currUser.id])
 
   if (!productsArr.length) {
     return (

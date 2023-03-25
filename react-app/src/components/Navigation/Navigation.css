@@ -28,15 +28,23 @@
   height: 65px;
   width: 100%;
   text-decoration: none;
-  background-color: #8d6232;
+  background-color: #332013;
   position: sticky;
+}
+
+.nav-links {
+  display: flex;
+  width: 230px;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .home-link,
 .menu-link,
-.about-link {
+.faq-link,
+.profile-link {
   text-decoration: none;
-  color: white;
+  color: #e8dfd8;
 }
 
 
@@ -49,9 +57,22 @@
 .logo-text-one,
 .logo-text-two {
   text-decoration: none;
-  color: white;
+  color: #e8dfd8;
 }
 
+.search-container {
+  display: flex;
+  height: 40px;
+}
+
+.search-form {
+  display: flex;
+  height: 100%;
+}
+
+.search-form-input {
+  border-radius: 15px;
+}
 
 .nav-bar-buttons {
   display: flex;
@@ -63,6 +84,7 @@
 
 .user-menu-button {
   display: flex;
+
 }
 
 .user-menu-container {
@@ -73,6 +95,8 @@
   width: 55px;
   height: 30px;
   cursor: pointer;
+  background-color: #e8dfd8;
+  color: #332013;
 }
 
 
@@ -94,12 +118,4 @@
 .menu-login-button:hover,
 .menu-signup-button:hover {
   cursor: pointer;
-}
-
-
-.nav-links {
-  display: flex;
-  width: 150px;
-  flex-direction: row;
-  justify-content: space-between;
 }

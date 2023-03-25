@@ -25,28 +25,16 @@ def get_one_product(id):
 
 
 # Define a product API endpoint that returns the image URLs for a product
-@product_routes.route('/api/products/<int:id>/images')
-def get_product_images(id):
-    # Assume that we have a database or other data source that contains image URLs for each product
-    # For this example, we'll just return a list of image URLs for the product ID that was requested
-    images = [
-        'https://example.com/image1.jpg',
-        'https://example.com/image2.jpg',
-        'https://example.com/image3.jpg'
-    ]
-    return jsonify(images)
-
-
-
-# # Get all products by seller id
-# @product_routes.route('/user/<int:id>')
-# def get_products_by_seller(seller_id):
-#     if current_user.is_authenticated:
-#         user = current_user.to_dict()
-#         user["id"] = seller_id
-#     products = Product.query.filter_by(seller_id).all()
-#     seller = User.query.get(id)
-#     return {'products': [product.to_dict() for product in products], 'seller': seller.to_dict()}
+# @product_routes.route('/api/products/<int:id>/images')
+# def get_product_images(id):
+#     # Assume that we have a database or other data source that contains image URLs for each product
+#     # For this example, we'll just return a list of image URLs for the product ID that was requested
+#     images = [
+#         'https://example.com/image1.jpg',
+#         'https://example.com/image2.jpg',
+#         'https://example.com/image3.jpg'
+#     ]
+#     return jsonify(images)
 
 
 # Delete a product
