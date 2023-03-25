@@ -20,24 +20,26 @@ export default function UpdateProduct() {
   const [errors, setErrors] = ([])
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
-  const [price, setPrice] = useState("")
-  const [quantity, setQuantity] = useState("")
-  const [imageUrl, setImageUrl] = useState("")
+  const [name, setName] = useState(product?.name)
+  const [description, setDescription] = useState(product?.description)
+  const [price, setPrice] = useState(product?.price)
+  const [quantity, setQuantity] = useState(product?.quantity)
+  const [imageUrl, setImageUrl] = useState(product?.image_url)
 
   const setProductDetails = async () => {
+    const productData = await dispatch(getSingleProduct(id))
+    console.log("data for form", productData)
 
-    setName(product?.name)
-    setDescription(product?.description)
-    setPrice(product?.price)
-    setQuantity(product?.quantity)
-    setImageUrl(product?.imageUrl)
+    setName(productData?.name)
+    setDescription(productData?.description)
+    setPrice(productData?.price)
+    setQuantity(productData?.quantity)
+    setImageUrl(productData?.imageUrl)
     setIsLoaded(true)
   }
 
   useEffect(() => {
-    if (!product) dispatch(getSingleProduct(id))
+    if (product) setIsLoaded(true)
     setProductDetails()
   }, [dispatch])
 
@@ -83,7 +85,7 @@ export default function UpdateProduct() {
 
   return (
     <>
-      <h1>Unable to load form</h1>
+      {!isLoaded && (<h1>Unable to load form</h1>)}
       {isLoaded && (
         <div className="create-product-container">
           <div className="create-product-form">
@@ -94,8 +96,8 @@ export default function UpdateProduct() {
             <form onSubmit={handleSubmit}>
 
               <div className="create-name-container">
-                <label> Name {errors.name &&
-                  <span className="error-message">{errors.name}</span>}
+                <label> Name {errors?.name &&
+                  <span className="error-message">{errors?.name}</span>}
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -106,8 +108,8 @@ export default function UpdateProduct() {
               </div>
 
               <div className="create-description-container">
-                <label> Describe your recipe! Get creative and tell us what you love about it. {errors.description &&
-                  <span className="error-message">{errors.description}</span>}
+                <label> Describe your recipe! Get creative and tell us what you love about it. {errors?.description &&
+                  <span className="error-message">{errors?.description}</span>}
                   <input
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -119,8 +121,8 @@ export default function UpdateProduct() {
               </div>
 
               <div className="create-price-container">
-                <label> Set a base price for your recipe {errors.price &&
-                  <span className="error-message">{errors.price}</span>}
+                <label> Set a base price for your recipe {errors?.price &&
+                  <span className="error-message">{errors?.price}</span>}
                   <input
                     value={price}
                     onChange={(e) => setPrice(Number(e.target.value))}
@@ -131,8 +133,8 @@ export default function UpdateProduct() {
               </div>
 
               <div className="create-quantity-container">
-                <label> How many are available to be ordered at once? {errors.quantity &&
-                  <span className="error-message">{errors.quantity}</span>}
+                <label> How many are available to be ordered at once? {errors?.quantity &&
+                  <span className="error-message">{errors?.quantity}</span>}
                   <input
                     value={quantity}
                     onChange={(e) => setQuantity(Number(e.target.value))}
@@ -143,8 +145,8 @@ export default function UpdateProduct() {
               </div>
 
               <div className="create-photo-container">
-                <label>Add a picture of your masterpiece! {errors.imageUrl &&
-                  <span className="error-message">{errors.imageUrl}</span>}
+                <label>Add a picture of your masterpiece! {errors?.imageUrl &&
+                  <span className="error-message">{errors?.imageUrl}</span>}
                   <input
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
