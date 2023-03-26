@@ -17,8 +17,10 @@ export default function UpdateProduct() {
 
   const { id } = useParams()
 
-  const [errors, setErrors] = ([])
+  const [errors, setErrors] = useState({})
   const [isLoaded, setIsLoaded] = useState(false);
+
+  if (!product.id) dispatch(getSingleProduct(id))
 
   const [name, setName] = useState(product?.name)
   const [description, setDescription] = useState(product?.description)
@@ -26,22 +28,13 @@ export default function UpdateProduct() {
   const [quantity, setQuantity] = useState(product?.quantity)
   const [imageUrl, setImageUrl] = useState(product?.image_url)
 
-  const setProductDetails = async () => {
-    const productData = await dispatch(getSingleProduct(id))
-    console.log("data for form", productData)
-
-    setName(productData?.name)
-    setDescription(productData?.description)
-    setPrice(productData?.price)
-    setQuantity(productData?.quantity)
-    setImageUrl(productData?.imageUrl)
-    setIsLoaded(true)
-  }
-
   useEffect(() => {
-    if (product) setIsLoaded(true)
-    setProductDetails()
-  }, [dispatch])
+    setName(product?.name)
+    setDescription(product?.description)
+    setPrice(product?.price)
+    setQuantity(product?.price)
+    setImageUrl(product?.image_url)
+  }, [product])
 
 
   const validate = () => {
@@ -62,6 +55,7 @@ export default function UpdateProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate()
+    console.log("errors", validationErrors)
     setErrors(validationErrors)
 
     if (!Object.values(validationErrors).length) {
@@ -76,7 +70,7 @@ export default function UpdateProduct() {
       }
 
       const update = await dispatch(updateProduct(updates))
-      if (update) history.push(`/products/${product.id}`)
+      history.push(`/products/${product.id}`)
     } else if (!currUser || (product.seller_id !== currUser.id)) {
       history.push("/")
     }
@@ -85,89 +79,89 @@ export default function UpdateProduct() {
 
   return (
     <>
-      {!isLoaded && (<h1>Unable to load form</h1>)}
-      {isLoaded && (
-        <div className="create-product-container">
-          <div className="create-product-form">
-            <div className="create-header-container">
-              <h1>Update Your Product</h1>
-              <h2>How has your recipe changed?</h2>
-            </div>
-            <form onSubmit={handleSubmit}>
-
-              <div className="create-name-container">
-                <label> Name {errors?.name &&
-                  <span className="error-message">{errors?.name}</span>}
-                  <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    type="text"
-                    placeholder="Name"
-                  />
-                </label>
-              </div>
-
-              <div className="create-description-container">
-                <label> Describe your recipe! Get creative and tell us what you love about it. {errors?.description &&
-                  <span className="error-message">{errors?.description}</span>}
-                  <input
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    type="text"
-                    placeholder="If your recipe will be ordered as multiples, for example a dozen cookies, please say so here."
-                    className="description-input"
-                  />
-                </label>
-              </div>
-
-              <div className="create-price-container">
-                <label> Set a base price for your recipe {errors?.price &&
-                  <span className="error-message">{errors?.price}</span>}
-                  <input
-                    value={price}
-                    onChange={(e) => setPrice(Number(e.target.value))}
-                    type="text"
-                    placeholder="Price"
-                  />
-                </label>
-              </div>
-
-              <div className="create-quantity-container">
-                <label> How many are available to be ordered at once? {errors?.quantity &&
-                  <span className="error-message">{errors?.quantity}</span>}
-                  <input
-                    value={quantity}
-                    onChange={(e) => setQuantity(Number(e.target.value))}
-                    type="text"
-                    placeholder="quantity"
-                  />
-                </label>
-              </div>
-
-              <div className="create-photo-container">
-                <label>Add a picture of your masterpiece! {errors?.imageUrl &&
-                  <span className="error-message">{errors?.imageUrl}</span>}
-                  <input
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                    type="text"
-                    placeholder="must be .png, .jpg, or .jpeg file"
-                  />
-                </label>
-              </div>
-
-              <div>
-                <button
-                  type="submit"
-                  className="submit-button"
-                >
-                  Update
-                </button>
-              </div>
-            </form>
+      {/* {!isLoaded && (<h1>Unable to load form</h1>)}
+      {isLoaded && ( */}
+      <div className="create-product-container">
+        <div className="create-product-form">
+          <div className="create-header-container">
+            <h1>Update Your Product</h1>
+            <h2>How has your recipe changed?</h2>
           </div>
+          <form onSubmit={handleSubmit}>
+
+            <div className="create-name-container">
+              <label> Name {errors?.name &&
+                <span className="error-message">{errors?.name}</span>}
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  placeholder="Name"
+                />
+              </label>
+            </div>
+
+            <div className="create-description-container">
+              <label> Describe your recipe! Get creative and tell us what you love about it. {errors?.description &&
+                <span className="error-message">{errors?.description}</span>}
+                <input
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  type="text"
+                  placeholder="If your recipe will be ordered as multiples, for example a dozen cookies, please say so here."
+                  className="description-input"
+                />
+              </label>
+            </div>
+
+            <div className="create-price-container">
+              <label> Set a base price for your recipe {errors?.price &&
+                <span className="error-message">{errors?.price}</span>}
+                <input
+                  value={price}
+                  onChange={(e) => setPrice(Number(e.target.value))}
+                  type="text"
+                  placeholder="Price"
+                />
+              </label>
+            </div>
+
+            <div className="create-quantity-container">
+              <label> How many are available to be ordered at once? {errors?.quantity &&
+                <span className="error-message">{errors?.quantity}</span>}
+                <input
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  type="text"
+                  placeholder="quantity"
+                />
+              </label>
+            </div>
+
+            <div className="create-photo-container">
+              <label>Add a picture of your masterpiece! {errors?.imageUrl &&
+                <span className="error-message">{errors?.imageUrl}</span>}
+                <input
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                  type="text"
+                  placeholder="must be .png, .jpg, or .jpeg file"
+                />
+              </label>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="submit-button"
+              >
+                Update
+              </button>
+            </div>
+          </form>
         </div>
-      )}
+      </div>
+      {/* )} */}
     </>
   )
 

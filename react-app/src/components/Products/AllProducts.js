@@ -11,33 +11,35 @@ export default function Products() {
   const productsArr = Object.values(products)
   console.log("products array", productsArr)
 
-  useEffect(() => {
-    dispatch(getAllProducts())
-  }, [dispatch])
+  if (!productsArr.length) dispatch(getAllProducts())
 
-  if (!productsArr.length) return null
+  // useEffect(() => {
+  //   dispatch(getAllProducts())
+  // }, [dispatch])
+
+  // if (!productsArr.length) return null
 
   return (
     <>
       <div className="products-div">
         {productsArr.map(product => (
-          <Link key={product.id} to={`/products/${product.id}`} className="product-tile">
+          <Link key={product?.id} to={`/products/${product?.id}`} className="product-tile">
             <div className="product-img-container">
               <img
                 className="product-img"
-                src={product.image_url} />
+                src={product?.image_url} />
             </div>
 
             <div className="product-details-container">
               <div className="product-name-rating-price">
                 <p className="product-name">
-                  {product.name}
+                  {product?.name}
                 </p>
                 <p className="product-rating">
-                  Rating:{product.avg_rating ? ' ★ ' + Number(product.avg_rating).toFixed(1) : '★ New'}
+                  Rating:{product?.avg_rating ? ' ★ ' + Number(product?.avg_rating).toFixed(1) : '★ New'}
                 </p>
                 <p className="product-price">
-                  ${product.price}
+                  ${product?.price}
                 </p>
               </div>
             </div>
