@@ -16,7 +16,7 @@ export default function DeleteProductModal({ productId }) {
   const handleClick = async (e) => {
     e.preventDefault()
     await dispatch(deleteProduct(productId)).then(closeModal)
-    history.push(`/user/profile/${currUser.id}`)
+    history.push(`/`)
   }
 
   return (

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUserProducts } from "../../store/products";
-import OpenModalButton from "../OpenModalButton";
+import OpenModalMenuItem from "../OpenModalButton/MenuItem";
 import DeleteProductModal from "../DeleteProductModal";
 import "./profile.css";
 
@@ -16,9 +16,9 @@ export default function Profile() {
   console.log("user products", userProducts)
   const productsArr = Object.values(userProducts)
 
+
   useEffect(() => {
     dispatch(getUserProducts(currUser.id))
-
   }, [dispatch, currUser.id])
 
   if (!currUser) {
@@ -74,15 +74,18 @@ export default function Profile() {
                   ${product.price}
                 </p>
                 <div className="edit-delete-buttons">
-                  <OpenModalButton
-                    className="delete-button"
-                    buttonText="Delete"
-                    onItemClick={handleDelete}
-                    modalComponent={<DeleteProductModal />}
-                  />
                   <Link to={`/products/${product.id}/edit`}>
                     <button className="edit-product-button">Update</button>
                   </Link>
+                  <button
+                    className="delete-button"
+                    onClick={handleDelete}
+                  >
+                    <OpenModalMenuItem
+                      itemText="Delete"
+                      modalComponent={<DeleteProductModal productId={product.id} />}
+                    />
+                  </button>
                 </div>
               </div>
             </div>

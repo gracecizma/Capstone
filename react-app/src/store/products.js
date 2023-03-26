@@ -29,10 +29,10 @@ const loadProductsByUser = (products) => {
   }
 }
 
-const removeProduct = (productId) => {
+const removeProduct = (product) => {
   return {
     type: REMOVE_PRODUCT,
-    payload: productId
+    payload: product
   }
 };
 
@@ -99,15 +99,17 @@ export const getUserProducts = (id) => async (dispatch) => {
 };
 
 export const deleteProduct = (id) => async (dispatch) => {
-  const res = await fetch(`/api/users/profile/${id}}`, {
-    method: "DELETE",
+  const res = await fetch(`/api/products/${id}`, {
+    method: 'DELETE',
     headers: { 'Content-Type': 'application/json' }
   });
+  console.log("delete product res", res)
 
   if (res.ok) {
     const product = await res.json();
-    dispatch(removeProduct(product.id));
-    dispatch(getUserProducts(product.seller_id))
+    console.log("deleted product", product)
+    dispatch(removeProduct(product));
+    return product
   }
 };
 
@@ -179,7 +181,9 @@ export default function productsReducer(state = initialState, action) {
     }
     case REMOVE_PRODUCT: {
       // const deleteState = { ...state, allProducts: { ...state.allProducts }, singleProduct: {}, userProducts: { ...state.userProducts } }
-      delete newState.allProducts[action.payload.id]
+      delete newState.singleProduct[action.payload.id]
+      delete newState.userProducts[action.payload.id]
+      console.log("delete state", newState)
       return newState
     }
     default:
