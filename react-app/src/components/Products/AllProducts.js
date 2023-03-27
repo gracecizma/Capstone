@@ -39,8 +39,9 @@ export default function Products() {
                   Rating:{product?.avg_rating ? ' ★ ' + Number(product?.avg_rating).toFixed(1) : '★ New'}
                 </p>
                 <p className="product-total-reviews">
+                  {product?.total_reviews === 0 ? "" : ""}
                   {product?.total_reviews === 1 ? product?.total_reviews + ' review' : ""}
-                  {product?.total_reviews !== 1 ? product?.total_reviews + ' reviews' : ""}
+                  {product?.total_reviews > 1 ? product?.total_reviews + ' reviews' : ""}
                 </p>
                 <p className="product-price">
                   ${product?.price}
