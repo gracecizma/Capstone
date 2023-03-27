@@ -16,7 +16,7 @@ def get_all_reviews():
 
 
 # Get reviews for a single product
-@review_routes.route('/<int:id')
+@review_routes.route('/<int:id>')
 def product_reviews(id):
     reviews = Review.query.filter(id == Review.product_id)
     return [review.to_dict() for review in reviews]
@@ -46,7 +46,7 @@ def new_review():
     return {"errors": "Unauthorized"}, 403
 
 #  Update review
-@review_routes.route('/<int:id', methods=["PUT"])
+@review_routes.route('/<int:id>', methods=["PUT"])
 def update_review(id):
     review = Review.query.get(id)
     form = UpdateReviewForm()
@@ -64,7 +64,7 @@ def update_review(id):
 
 
 #  Delete a review
-@review_routes.route('/<int:id', methods=["DELETE"])
+@review_routes.route('/<int:id>', methods=["DELETE"])
 def delete_review(id):
     if current_user.is_authenticated:
         review = Review.query.get(id)
