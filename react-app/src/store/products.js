@@ -29,10 +29,10 @@ const loadProductsByUser = (products) => {
   }
 }
 
-const removeProduct = (productId) => {
+const removeProduct = (product) => {
   return {
     type: REMOVE_PRODUCT,
-    payload: productId
+    payload: product
   }
 };
 
@@ -93,21 +93,23 @@ export const getUserProducts = (id) => async (dispatch) => {
       productsObj[product.id] = product
     })
 
-    console.log("user products obj", productsObj)
+    // console.log("user products obj", productsObj)
     dispatch(loadProductsByUser(productsObj))
   }
 };
 
 export const deleteProduct = (id) => async (dispatch) => {
-  const res = await fetch(`/api/users/profile/${id}}`, {
-    method: "DELETE",
+  const res = await fetch(`/api/products/${id}`, {
+    method: 'DELETE',
     headers: { 'Content-Type': 'application/json' }
   });
+  // console.log("delete product res", res)
 
   if (res.ok) {
     const product = await res.json();
-    dispatch(removeProduct(product.id));
-    dispatch(getUserProducts(product.seller_id))
+    // console.log("deleted product", product)
+    dispatch(removeProduct(product));
+    return product
   }
 };
 
@@ -135,10 +137,12 @@ export const updateProduct = (product) => async (dispatch) => {
 
   if (res.ok) {
     const product = await res.json()
-    console.log("update product fetch", product)
+    // console.log("update product fetch", product)
     dispatch(editProduct(product))
   }
 };
+
+// Reducer
 
 const initialState = {
   allProducts: {},
@@ -162,7 +166,7 @@ export default function productsReducer(state = initialState, action) {
     }
     case GET_PRODUCTS_BY_USER: {
       // const userState = { ...state, allProducts: { ...state.allProducts }, singleProduct: {}, userProducts: {} }
-      // console.log("user state", userState)
+      // console.log("user products state", userState)
       newState.userProducts = action.payload
       return newState
     }
@@ -174,12 +178,14 @@ export default function productsReducer(state = initialState, action) {
     case UPDATE_PRODUCT: {
       // const updateState = { ...state, allProducts: { ...state.allProducts }, singleProduct: {}, userProducts: {} }
       newState.allProducts[action.payload.id] = action.payload
-      console.log("update state", newState)
+      // console.log("update product state", newState)
       return newState
     }
     case REMOVE_PRODUCT: {
       // const deleteState = { ...state, allProducts: { ...state.allProducts }, singleProduct: {}, userProducts: { ...state.userProducts } }
-      delete newState.allProducts[action.payload.id]
+      delete newState.singleProduct[action.payload.id]
+      delete newState.userProducts[action.payload.id]
+      // console.log("delete product state", newState)
       return newState
     }
     default:
