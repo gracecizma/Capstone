@@ -1,5 +1,6 @@
 const GET_SINGLE_REVIEW = "reviews/GET_SINGLE_REVIEW"
 const GET_USER_REVIEWS = "reviews/GET_USER_REVIEWS"
+const GET_PRODUCT_REVIEWS = "reviews/GET_PRODUCT_REVIEWS"
 const REMOVE_REVIEW = "reviews/REMOVE_REVIEW"
 const CREATE_REVIEW = "reviews/CREATE_REVIEW"
 const UPDATE_REVIEW = "reviews/UPDATE_REVIEW"
@@ -17,6 +18,13 @@ const loadSingleReview = (review) => {
 const loadReviewsByUser = (reviews) => {
   return {
     type: GET_USER_REVIEWS,
+    payload: reviews
+  }
+};
+
+const productReviews = (reviews) => {
+  return {
+    type: GET_PRODUCT_REVIEWS,
     payload: reviews
   }
 };
@@ -60,10 +68,20 @@ export const getUserReviews = (id) => async (dispatch) => {
 
   if (res.ok) {
     const reviews = await res.json()
-    // console.log("user reviews fetch", reviews)
+    console.log("user reviews fetch", reviews)
     dispatch(loadReviewsByUser(reviews))
   }
 };
+
+export const getProductReviews = (productId) => async (dispatch) => {
+  const res = await fetch(`/api/products/${productId}/reviews`)
+
+  if (res.ok) {
+    const reviews = await res.json()
+    console.log("product reviews fetch", reviews)
+    dispatch(productReviews(reviews))
+  }
+}
 
 export const deleteReview = (id) => async (dispatch) => {
   const res = await fetch(`/api/reviews/${id}`, {
@@ -113,7 +131,8 @@ export const updateReview = (review) => async (dispatch) => {
 
 const initialState = {
   singleReview: {},
-  userReviews: {}
+  userReviews: {},
+  productReviews: {}
 }
 
 export default function reviewsReducer(state = initialState, action) {
@@ -126,7 +145,12 @@ export default function reviewsReducer(state = initialState, action) {
     }
     case GET_USER_REVIEWS: {
       newState.userReviews = action.payload
-      // console.log("user reviews state", new state)
+      console.log("user reviews state", newState)
+      return newState
+    }
+    case GET_PRODUCT_REVIEWS: {
+      newState.productReviews = action.payload
+      console.log("product reviews state", newState)
       return newState
     }
     case CREATE_REVIEW: {

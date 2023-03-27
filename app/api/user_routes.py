@@ -28,7 +28,7 @@ def user(id):
 @user_routes.route('/profile/<int:id>/reviews')
 def get_reviews_by_seller(id):
     reviews = Review.query.filter_by(user_id=id).all()
-    return {'reviews': [review.to_dict() for review in reviews]}
+    return [review.to_dict() for review in reviews]
 
 
 # Get all products by current user

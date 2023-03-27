@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { login } from "../../store/session";
+import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
@@ -13,13 +13,19 @@ function LoginFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
+    const data = await dispatch(sessionActions.login(email, password));
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal()
     }
   };
+
+  const handleDemoLogin = (e) => {
+    e.preventDefault();
+    return dispatch(sessionActions.login("demo@aa.io", "password"))
+      .then(closeModal)
+  }
 
   return (
     <>
@@ -49,6 +55,12 @@ function LoginFormModal() {
           />
         </label>
         <button type="submit">Log In</button>
+        <button
+          className="demo-login"
+          onClick={handleDemoLogin}
+        >
+          Log in as Demo User
+        </button>
       </form>
     </>
   );
