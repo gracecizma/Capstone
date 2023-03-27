@@ -7,7 +7,7 @@ from datetime import datetime
 def seed_products():
     users = User.query.all()
     bagel = Product(
-        name="Bagel", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=15, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 3), image_url="https://i.imgur.com/RKMkkny.jpg"
+        name="Bagels", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=15, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 3), image_url="https://i.imgur.com/RKMkkny.jpg"
     )
     bread = Product(
         name="Bread", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/z3Xe6nG.jpg"
@@ -16,22 +16,22 @@ def seed_products():
         name="Cheesecake", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=20, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/n87eflj.jpg"
     )
     chocolate_chip = Product(
-        name="Chocolate Chip Cookie", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=20, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/cugUb0s.jpg"
+        name="Chocolate Chip Cookies", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=20, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/cugUb0s.jpg"
     )
     oatmeal = Product(
-        name="Oatmeal Cinnamon Cookie", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/yRAEN0D.jpg"
+        name="Oatmeal Cinnamon Cookies", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/yRAEN0D.jpg"
     )
     cranberry = Product(
-        name="Cranberry Orange Cookie", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/OPKI9qv.jpg"
+        name="Cranberry Orange Cookies", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/OPKI9qv.jpg"
     )
     pb_chocolate = Product(
-        name="Peanut Butter Chocolate Cookie", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/XEjD34Z.jpg"
+        name="Peanut Butter Chocolate Cookies", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=18, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/XEjD34Z.jpg"
     )
     macarons = Product(
         name="Macarons", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=22, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/fJ1Rvws.jpg"
     )
     smores = Product(
-        name="S'mores Cookie", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=16, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/RS74Bte.jpg"
+        name="S'mores Cookies", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=16, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/RS74Bte.jpg"
     )
     brownies = Product(
         name="Brownies", description="This is a great product. The best product. The best you've ever had. You should buy it.", price=14, quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=randint(1, 4), image_url="https://i.imgur.com/fkqcqKt.jpg"
