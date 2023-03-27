@@ -18,10 +18,10 @@ export default function Profile() {
 
 
   useEffect(() => {
-    dispatch(getUserProducts(currUser.id))
-  }, [dispatch, currUser.id])
+    dispatch(getUserProducts(currUser?.id))
+  }, [dispatch, currUser?.id])
 
-  if (!currUser) {
+  if (!currUser?.id) {
     return (
       <h1>Please log in to see your profile</h1>
     )
