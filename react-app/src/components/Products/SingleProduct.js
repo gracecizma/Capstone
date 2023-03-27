@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../../store/products";
+import { get }
 import { useParams } from "react-router-dom";
+import ReviewModal from "../ReviewModal"
+import OpenModalMenuItem from "../OpenModalButton/MenuItem";
 import "./singleproduct.css";
 
 

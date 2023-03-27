@@ -1,4 +1,4 @@
-function StarRating({ rating, setRating }) {
+export default function StarRating({ rating, setRating }) {
 
   const handleEnter = (index) => {
     setRating(index + 1);
@@ -26,5 +26,3 @@ function StarRating({ rating, setRating }) {
     </div >
   )
 }
-
-export default StarRating;

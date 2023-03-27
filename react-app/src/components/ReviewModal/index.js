@@ -6,7 +6,7 @@ import { createNewReview } from '../../store/reviews';
 import StarRating from './StarRating'
 import './reviewmodal.css'
 
-function ReviewModal({ productId }) {
+export default function ReviewModal({ productId }) {
   const [rating, setRating] = useState(0)
   const [review, setReview] = useState('')
   const [errors, setErrors] = useState([])
@@ -53,4 +53,43 @@ function ReviewModal({ productId }) {
       return;
     }
   }
+
+  return (
+    <>
+      <div className="review-modal-container">
+        <form
+          onSubmit={handleSubmit}
+          className="review-form"
+        >
+          <div className="review-header">
+            <h2>How was your stay?</h2>
+          </div>
+          <div className="errors">
+            {errors?.map((error, index) =>
+              <div key={index} className="error-message">{error}</div>
+            )}
+          </div>
+          <textarea
+            cols="60"
+            rows="5"
+            placeholder="Leave your review here"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+          >
+          </textarea>
+          <div className="stars-container">
+
+            <StarRating rating={rating} setRating={setRating} />
+          </div>
+          <div className="review-submit">
+            <button
+              className="submit-review-button"
+              disabled={disabled}>
+              Submit your review
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
+  )
 }
