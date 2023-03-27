@@ -92,7 +92,7 @@ export default function SingleProduct() {
             {productReviewsArr?.slice(0).reverse().map(review => (
               <div key={review.id} className="single-review">
                 <div className="review-username">{review?.author?.username}</div>
-                <div className="review-rating">{review?.stars} ★ </div>
+                <div className="review-rating">{review?.stars}</div>
                 <div className="review-text">{review?.comment}</div>
                 {currUser && review?.user_id === currUser.id && (
                   <button className="delete-review-button">
