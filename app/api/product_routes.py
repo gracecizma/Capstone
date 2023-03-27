@@ -95,3 +95,10 @@ def update_product(id):
             return product.to_dict()
         return {'errors': form.errors}, 401
     return {'errors': 'Unauthorized'}, 403
+
+
+# Get reviews for a single product
+@product_routes.route('/<int:id>/reviews')
+def product_reviews(id):
+    reviews = Review.query.filter_by(product_id=id).all()
+    return [review.to_dict() for review in reviews]

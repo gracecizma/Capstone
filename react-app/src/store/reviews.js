@@ -68,17 +68,17 @@ export const getUserReviews = (id) => async (dispatch) => {
 
   if (res.ok) {
     const reviews = await res.json()
-    // console.log("user reviews fetch", reviews)
+    console.log("user reviews fetch", reviews)
     dispatch(loadReviewsByUser(reviews))
   }
 };
 
 export const getProductReviews = (productId) => async (dispatch) => {
-  const res = await fetch(`/api/reviews/product/${productId}`)
+  const res = await fetch(`/api/products/${productId}/reviews`)
 
   if (res.ok) {
     const reviews = await res.json()
-    // console.log("product reviews fetch", reviews)
+    console.log("product reviews fetch", reviews)
     dispatch(productReviews(reviews))
   }
 }
@@ -145,12 +145,12 @@ export default function reviewsReducer(state = initialState, action) {
     }
     case GET_USER_REVIEWS: {
       newState.userReviews = action.payload
-      // console.log("user reviews state", newState)
+      console.log("user reviews state", newState)
       return newState
     }
     case GET_PRODUCT_REVIEWS: {
       newState.productReviews = action.payload
-      // console.log("product reviews state", newState)
+      console.log("product reviews state", newState)
       return newState
     }
     case CREATE_REVIEW: {
