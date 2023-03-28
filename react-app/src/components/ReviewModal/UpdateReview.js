@@ -13,7 +13,6 @@ export default function UpdateReview({ review }) {
   const history = useHistory()
 
   const toUpdate = useSelector((state) => state?.reviews?.singleReview)
-  // console.log("review to update", Object.values(toUpdate)[1])
 
   const currUser = useSelector((state) => state?.session?.user)
 
