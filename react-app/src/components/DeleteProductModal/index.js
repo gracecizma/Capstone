@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom"
 import './deleteproduct.css'
 
 
-export default function DeleteProductModal({ productId }) {
+export default function DeleteProductModal({ product }) {
   const currUser = useSelector((state) => state?.session?.user)
 
   const { closeModal } = useModal()
@@ -15,8 +15,8 @@ export default function DeleteProductModal({ productId }) {
 
   const handleClick = async (e) => {
     e.preventDefault()
-    await dispatch(deleteProduct(productId)).then(closeModal)
-    history.push(`/`)
+    await dispatch(deleteProduct(product)).then(closeModal)
+    history.push(`/users/profile/${product.seller_id}`)
   }
 
   return (

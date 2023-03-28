@@ -20,10 +20,10 @@ class Product(db.Model):
 
 
     # images = db.relationship('Image', back_populates='product')
-    cart_item = db.relationship("CartItem", back_populates='product')
+    cart_item = db.relationship("CartItem", back_populates='product', cascade="delete, merge, save-update")
     order_product = db.relationship("OrderProduct", back_populates='product')
-    reviews = db.relationship("Review", back_populates="product")
-    favorite = db.relationship("Favorite", back_populates="product")
+    reviews = db.relationship("Review", back_populates="product", cascade="delete, merge, save-update")
+    favorite = db.relationship("Favorite", back_populates="product", cascade="delete, merge, save-update")
 
     def avg_rating(self):
         if len(self.reviews) == 0:
