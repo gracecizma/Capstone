@@ -105,12 +105,14 @@ export const createNewReview = (newReview) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newReview)
   })
+  console.log("new review fetch", res)
 
   if (res.ok) {
     const data = await res.json()
-    // console.log("new review fetch", data)
+    console.log("new review fetch", data)
     dispatch(createReview(data))
-    return data
+    dispatch(getUserReviews(newReview.user_id))
+    dispatch(getProductReviews(newReview.product_id))
   }
 };
 
@@ -159,7 +161,7 @@ export default function reviewsReducer(state = initialState, action) {
     }
     case CREATE_REVIEW: {
       newState.userReviews[action.payload.id] = action.payload
-      // console.log("create review state", newState)
+      console.log("create review state", newState)
       return newState
     }
     case UPDATE_REVIEW: {

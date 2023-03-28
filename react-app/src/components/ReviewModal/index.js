@@ -8,7 +8,7 @@ import './reviewmodal.css'
 
 export default function ReviewModal({ productId }) {
   const [rating, setRating] = useState(0)
-  const [review, setReview] = useState('')
+  const [comment, setComment] = useState('')
   const [errors, setErrors] = useState([])
   const [disabled, setDisabled] = useState(true)
 
@@ -20,7 +20,7 @@ export default function ReviewModal({ productId }) {
 
   useEffect(() => {
     setErrors(validate())
-  }, [review, rating])
+  }, [comment, rating])
 
   useEffect(() => {
     if (!errors.length && rating > 0) {
@@ -30,7 +30,7 @@ export default function ReviewModal({ productId }) {
 
   const validate = () => {
     const validationErrors = [];
-    if (review && review.length < 10) {
+    if (comment && comment.length < 10) {
       validationErrors.push('Review needs 10 or more characters');
     }
     return validationErrors;
@@ -40,10 +40,11 @@ export default function ReviewModal({ productId }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-
     if (!errors.length) {
       const newReview = {
-        review,
+        user_id: currUser.id,
+        product_id: productId,
+        comment,
         stars: rating
       }
       await dispatch(createNewReview(newReview))
@@ -73,8 +74,8 @@ export default function ReviewModal({ productId }) {
             cols="60"
             rows="5"
             placeholder="Leave your review here"
-            value={review}
-            onChange={(e) => setReview(e.target.value)}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           >
           </textarea>
           <div className="stars-container">
