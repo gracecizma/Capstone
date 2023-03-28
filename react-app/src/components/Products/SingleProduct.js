@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../../store/products";
 import { getProductReviews, getUserReviews } from "../../store/reviews";
@@ -16,15 +16,15 @@ export default function SingleProduct() {
   const product = useSelector((state) => state?.products?.singleProduct)
   // console.log("product obj", product)
   const currUser = useSelector((state) => state?.session?.user)
-  // const userReviews = useSelector((state) => state?.reviews?.userReviews)
+  const userReviews = useSelector((state) => state?.reviews?.userReviews)
   // console.log("user reviews", userReviews)
-  // const userReviewsArr = Object.values(userReviews)
+  const userReviewsArr = Object.values(userReviews)
   // console.log("user reviews array", userReviewsArr)
   const productReviews = useSelector((state) => state?.reviews?.productReviews)
   // console.log("product reviews", productReviews)
   const productReviewsArr = Object.values(productReviews)
 
-  // const [hasReviewed, setHasReviewed] = useState(false)
+  const [hasReviewed, setHasReviewed] = useState(false)
 
   // if (!product.id) dispatch(getSingleProduct(id))
 
@@ -34,15 +34,15 @@ export default function SingleProduct() {
     dispatch(getUserReviews(currUser?.id))
   }, [dispatch, currUser.id])
 
-  // if (userReviewsArr?.some((review) => review.product_id === id)) {
-  //   setHasReviewed(true)
-  // }
+  if (userReviewsArr?.some((review) => review.product_id === id)) {
+    setHasReviewed(true)
+  }
 
   const deleteReview = (reviewId) => {
     dispatch(deleteReview(reviewId))
   }
 
-  const canReview = (currUser && product.user_id !== currUser.id)
+  const canReview = (currUser && product.seller_id !== currUser.id && !hasReviewed)
 
   return (
     <>
