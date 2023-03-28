@@ -98,17 +98,18 @@ export const getUserProducts = (id) => async (dispatch) => {
   }
 };
 
-export const deleteProduct = (id) => async (dispatch) => {
-  const res = await fetch(`/api/products/${id}`, {
+export const deleteProduct = (product) => async (dispatch) => {
+  const res = await fetch(`/api/products/${product.id}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' }
   });
   // console.log("delete product res", res)
 
   if (res.ok) {
-    const product = await res.json();
+    const data = await res.json();
     // console.log("deleted product", product)
-    dispatch(removeProduct(product));
+    dispatch(removeProduct(data));
+    dispatch(getUserProducts(product.seller_id))
     return product
   }
 };
@@ -136,9 +137,10 @@ export const updateProduct = (product) => async (dispatch) => {
   })
 
   if (res.ok) {
-    const product = await res.json()
+    const data = await res.json()
     // console.log("update product fetch", product)
-    dispatch(editProduct(product))
+    dispatch(editProduct(data))
+    dispatch(getUserProducts(product.seller_id))
   }
 };
 

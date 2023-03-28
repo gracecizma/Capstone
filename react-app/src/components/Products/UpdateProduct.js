@@ -18,7 +18,7 @@ export default function UpdateProduct() {
   const { id } = useParams()
 
   const [errors, setErrors] = useState({})
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
 
   if (!product.id) dispatch(getSingleProduct(id))
 
@@ -69,7 +69,7 @@ export default function UpdateProduct() {
         "image_url": imageUrl
       }
 
-      const update = await dispatch(updateProduct(updates))
+      await dispatch(updateProduct(updates))
       history.push(`/products/${product.id}`)
     } else if (!currUser || (product.seller_id !== currUser.id)) {
       history.push("/")

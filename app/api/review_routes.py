@@ -15,7 +15,11 @@ def get_all_reviews():
     return [review.to_dict() for review in reviews]
 
 
-
+# Get a single review
+@review_routes.route('/<int:id>')
+def get_single_review(id):
+    review = Review.query.get(id)
+    return review.to_dict()
 
 
 # Create new review

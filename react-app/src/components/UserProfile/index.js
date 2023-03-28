@@ -83,7 +83,7 @@ export default function Profile() {
                   >
                     <OpenModalMenuItem
                       itemText="Delete"
-                      modalComponent={<DeleteProductModal productId={product.id} />}
+                      modalComponent={<DeleteProductModal product={product} />}
                     />
                   </button>
                 </div>
