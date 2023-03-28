@@ -19,7 +19,7 @@ export default function SingleProduct() {
   const userReviews = useSelector((state) => state?.reviews?.userReviews)
   // console.log("user reviews", userReviews)
   const userReviewsArr = Object.values(userReviews)
-  // console.log("user reviews array", userReviewsArr)
+  console.log("user reviews array", userReviewsArr)
   const productReviews = useSelector((state) => state?.reviews?.productReviews)
   // console.log("product reviews", productReviews)
   const productReviewsArr = Object.values(productReviews)
@@ -32,18 +32,21 @@ export default function SingleProduct() {
     dispatch(getSingleProduct(id))
     dispatch(getProductReviews(id))
     dispatch(getUserReviews(currUser?.id))
+    if (userReviewsArr.some((review) => review.product_id === product.id)) {
+      setHasReviewed(true)
+    }
   }, [dispatch, currUser.id])
 
-  if (userReviewsArr?.some((review) => review.product_id === id)) {
-    setHasReviewed(true)
-  }
+
+  // console.log("product id", id)
 
   const deleteReview = (reviewId) => {
     dispatch(deleteReview(reviewId))
   }
 
-  const canReview = (currUser && product.seller_id !== currUser.id && !hasReviewed)
+  const canReview = (currUser && (product.seller_id !== currUser.id) && !hasReviewed)
 
+  console.log("can review?", canReview)
   return (
     <>
       <div className="single-product-div">
