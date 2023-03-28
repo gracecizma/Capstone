@@ -58,7 +58,7 @@ export const getSingleReview = (id) => async (dispatch) => {
 
   if (res.ok) {
     const review = await res.json()
-    // console.log("single review fetch", review)
+    console.log("single review fetch", review)
     dispatch(loadSingleReview(review))
   }
 };
@@ -68,7 +68,7 @@ export const getUserReviews = (id) => async (dispatch) => {
 
   if (res.ok) {
     const reviews = await res.json()
-    console.log("user reviews fetch", reviews)
+    // console.log("user reviews fetch", reviews)
     dispatch(loadReviewsByUser(reviews))
   }
 };
@@ -78,21 +78,23 @@ export const getProductReviews = (productId) => async (dispatch) => {
 
   if (res.ok) {
     const reviews = await res.json()
-    console.log("product reviews fetch", reviews)
+    // console.log("product reviews fetch", reviews)
     dispatch(productReviews(reviews))
   }
 }
 
-export const deleteReview = (id) => async (dispatch) => {
-  const res = await fetch(`/api/reviews/${id}`, {
+export const deleteReview = (review) => async (dispatch) => {
+  const res = await fetch(`/api/reviews/${review.id}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' }
   });
 
   if (res.ok) {
-    const review = await res.json();
+    const data = await res.json();
     // console.log("deleted review fetch", review)
-    dispatch(removeReview(review));
+    dispatch(removeReview(data));
+    dispatch(getUserReviews(review.user_id))
+    dispatch(getProductReviews(review.product_id))
     return review
   }
 };
@@ -120,9 +122,11 @@ export const updateReview = (review) => async (dispatch) => {
   })
 
   if (res.ok) {
-    const review = await res.json()
+    const data = await res.json()
     // console.log("update review fetch", review)
-    dispatch(editReview(review))
+    dispatch(editReview(data))
+    dispatch(getUserReviews(review.user_id))
+    dispatch(getProductReviews(review.product_id))
   }
 };
 
@@ -140,17 +144,17 @@ export default function reviewsReducer(state = initialState, action) {
   switch (action.type) {
     case GET_SINGLE_REVIEW: {
       newState.singleReview = action.payload
-      // console.log("single review state", newState)
+      console.log("single review state", newState)
       return newState
     }
     case GET_USER_REVIEWS: {
       newState.userReviews = action.payload
-      console.log("user reviews state", newState)
+      // console.log("user reviews state", newState)
       return newState
     }
     case GET_PRODUCT_REVIEWS: {
       newState.productReviews = action.payload
-      console.log("product reviews state", newState)
+      // console.log("product reviews state", newState)
       return newState
     }
     case CREATE_REVIEW: {

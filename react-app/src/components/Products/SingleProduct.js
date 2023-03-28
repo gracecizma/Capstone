@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../../store/products";
-import { getProductReviews, getUserReviews, deleteReview, updateReview } from "../../store/reviews";
+import { getProductReviews, getUserReviews } from "../../store/reviews";
 import { useParams } from "react-router-dom";
 import ReviewModal from "../ReviewModal"
 import DeleteReviewModal from "../ReviewModal/DeleteReview";
 import OpenModalMenuItem from "../OpenModalButton/MenuItem";
+import UpdateReview from "../ReviewModal/UpdateReview";
 import "./singleproduct.css";
 
 
@@ -15,12 +16,12 @@ export default function SingleProduct() {
   const product = useSelector((state) => state?.products?.singleProduct)
   // console.log("product obj", product)
   const currUser = useSelector((state) => state?.session?.user)
-  const userReviews = useSelector((state) => state?.reviews?.userReviews)
-  console.log("user reviews", userReviews)
-  const userReviewsArr = Object.values(userReviews)
-  console.log("user reviews array", userReviewsArr)
+  // const userReviews = useSelector((state) => state?.reviews?.userReviews)
+  // console.log("user reviews", userReviews)
+  // const userReviewsArr = Object.values(userReviews)
+  // console.log("user reviews array", userReviewsArr)
   const productReviews = useSelector((state) => state?.reviews?.productReviews)
-  console.log("product reviews", productReviews)
+  // console.log("product reviews", productReviews)
   const productReviewsArr = Object.values(productReviews)
 
   // const [hasReviewed, setHasReviewed] = useState(false)
@@ -31,7 +32,7 @@ export default function SingleProduct() {
     dispatch(getSingleProduct(id))
     dispatch(getProductReviews(id))
     dispatch(getUserReviews(currUser?.id))
-  }, [dispatch])
+  }, [dispatch, currUser.id])
 
   // if (userReviewsArr?.some((review) => review.product_id === id)) {
   //   setHasReviewed(true)
@@ -95,12 +96,20 @@ export default function SingleProduct() {
                 <div className="review-rating">{review?.stars + ' ★ '}</div>
                 <div className="review-text">{review?.comment}</div>
                 {currUser && review?.user_id === currUser.id && (
-                  <button className="delete-review-button">
-                    <OpenModalMenuItem
-                      itemText="Delete"
-                      modalComponent={<DeleteReviewModal review={review} />}
-                    />
-                  </button>
+                  <div className="update-delete-reviews">
+                    <button className="delete-review-button">
+                      <OpenModalMenuItem
+                        itemText="Delete"
+                        modalComponent={<DeleteReviewModal review={review} />}
+                      />
+                    </button>
+                    <button className="update-review-button">
+                      <OpenModalMenuItem
+                        itemText="Update"
+                        modalComponent={<UpdateReview review={review} />}
+                      />
+                    </button>
+                  </div>
                 )}
               </div>
             ))}

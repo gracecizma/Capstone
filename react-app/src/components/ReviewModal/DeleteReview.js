@@ -10,7 +10,7 @@ export default function DeleteReviewModal({ review }) {
 
   const handleClick = (e) => {
     e.preventDefault()
-    dispatch(deleteReview(review.id)).then(closeModal)
+    dispatch(deleteReview(review)).then(closeModal)
   }
 
   return (

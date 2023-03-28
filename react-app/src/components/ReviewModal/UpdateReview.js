@@ -1,22 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useModal } from '../../context/Modal';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom"
-import { createNewReview } from '../../store/reviews';
-import StarRating from './StarRating'
-import './reviewmodal.css'
+import { useModal } from "../../context/Modal";
+import StarRating from "./StarRating"
+import { updateReview, getSingleReview } from "../../store/reviews";
+import { getSingleProduct } from "../../store/products";
 
-export default function ReviewModal({ productId }) {
-  const [rating, setRating] = useState(0)
-  const [review, setReview] = useState('')
-  const [errors, setErrors] = useState([])
-  const [disabled, setDisabled] = useState(true)
 
-  const currUser = useSelector((state) => state?.session?.user)
-
+export default function UpdateReview({ review }) {
   const { closeModal } = useModal()
   const dispatch = useDispatch()
   const history = useHistory()
+
+  const toUpdate = useSelector((state) => state?.reviews?.singleReview)
+  // console.log("review to update", Object.values(toUpdate)[1])
+
+  const currUser = useSelector((state) => state?.session?.user)
+
+  if (!toUpdate.id) dispatch(getSingleReview(review.id))
+
+  const [comment, setComment] = useState("")
+  const [rating, setRating] = useState(toUpdate.stars)
+  const [errors, setErrors] = useState([])
+  const [disabled, setDisabled] = useState(false)
+
+  useEffect(() => {
+    setComment(toUpdate?.comment)
+    setRating(toUpdate?.stars)
+  }, [toUpdate, dispatch])
 
   useEffect(() => {
     setErrors(validate())
@@ -39,18 +50,24 @@ export default function ReviewModal({ productId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const validationErrors = validate()
+    setErrors(validationErrors)
+    // console.log("errors", errors)
 
 
-    if (!errors.length) {
-      const newReview = {
-        review,
-        stars: rating
+    if (!Object.values(validationErrors).length) {
+      const updates = {
+        "id": review.id,
+        "user_id": currUser.id,
+        "product_id": review.product_id,
+        "comment": comment,
+        "stars": rating
       }
-      await dispatch(createNewReview(newReview))
+      await dispatch(updateReview(updates))
         .then(closeModal)
-      history.push(`/products/${productId}`)
     } else {
-      return;
+      setDisabled(true)
+      return
     }
   }
 
@@ -72,9 +89,8 @@ export default function ReviewModal({ productId }) {
           <textarea
             cols="60"
             rows="5"
-            placeholder="Leave your review here"
-            value={review}
-            onChange={(e) => setReview(e.target.value)}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           >
           </textarea>
           <div className="stars-container">
@@ -85,7 +101,7 @@ export default function ReviewModal({ productId }) {
             <button
               className="submit-review-button"
               disabled={disabled}>
-              Submit your review
+              Update
             </button>
           </div>
         </form>
