@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 
 def seed_categories():
     empty = Category(
-        name="Empty"
+        name="None"
     )
     bread = Category(
         name="Bread"
