@@ -42,7 +42,7 @@ function App() {
           <Route path="/products/breads">
             <Breads />
           </Route>
-          <Route path="/products/cake">
+          <Route path="/products/cakes">
             <Cake />
           </Route>
           <Route path="/products/cookies">

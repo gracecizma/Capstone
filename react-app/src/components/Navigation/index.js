@@ -8,21 +8,56 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state?.session?.user);
 
 	const history = useHistory();
-	const ulRef = useRef();
+	const ulRef = useRef(null);
 
 	const [search, setSearch] = useState("");
-
-
 	const [isOpen, setIsOpen] = useState(false);
+
+	useEffect(() => {
+		if (!isOpen) return;
+
+		const closeMenu = (e) => {
+			if (ulRef.current && !ulRef.current.contains(e.target)) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener("click", closeMenu);
+
+		return () => document.removeEventListener("click", closeMenu);
+	}, [ulRef, isOpen]);
 
 	function handleMenuToggle() {
 		setIsOpen(!isOpen);
 	}
 
 	function handleMenuItemClick(category) {
-		// Navigate to the selected category
-		console.log(`Navigating to ${category} category`);
+		if (category === 'All') {
+			history.push('/products')
+			handleMenuToggle()
+		}
+		if (category === 'Breads') {
+			history.push('/products/breads')
+			handleMenuToggle()
+		}
+		if (category === 'Cookies') {
+			history.push('/products/cookies')
+			handleMenuToggle()
+		}
+		if (category === 'Cakes') {
+			history.push('/products/cakes')
+			handleMenuToggle()
+		}
+		if (category === 'Etc') {
+			history.push('/products/sweets')
+			handleMenuToggle()
+		}
 	}
+
+	const ulClassName = "product-dropdown" + (isOpen ? "" : " hidden");
+	console.log("ulClassName", ulClassName)
+
+
 
 	return (
 		<>
@@ -40,12 +75,12 @@ function Navigation({ isLoaded }) {
 							Products
 						</p>
 						{isOpen && (
-							<ul className="dropdown-menu">
-								<li onClick={() => handleMenuItemClick('All')}>All Products</li>
-								<li onClick={() => handleMenuItemClick('Breads')}>Breads</li>
-								<li onClick={() => handleMenuItemClick('Breads')}>Cookies</li>
-								<li onClick={() => handleMenuItemClick('Cakes')}>Cakes & Pies</li>
-								<li onClick={() => handleMenuItemClick('Etc')}>Assorted Sweets</li>
+							<ul className={ulClassName} ref={ulRef}>
+								<li className="product-link" onClick={() => handleMenuItemClick('All')}>All Products</li>
+								<li className="product-link" onClick={() => handleMenuItemClick('Breads')}>Breads</li>
+								<li className="product-link" onClick={() => handleMenuItemClick('Cookies')}>Cookies</li>
+								<li className="product-link" onClick={() => handleMenuItemClick('Cakes')}>Cakes & Pies</li>
+								<li className="product-link" onClick={() => handleMenuItemClick('Etc')}>Assorted Sweets</li>
 							</ul>
 						)}
 					</div>
