@@ -34,6 +34,14 @@ def upgrade():
                     sa.UniqueConstraint('username')
                     )
 
+    #  Categories table
+    op.create_table('categories',
+                    sa.Column('id', sa.Integer(), nullable=False),
+                    sa.Column('name', sa.String(length=50), nullable=False),
+                    sa.PrimaryKeyConstraint('id'),
+                    sa.UniqueConstraint('name')
+                    )
+
     # Products table
     op.create_table('products',
                     sa.Column('id', sa.Integer(), nullable=False),
@@ -53,13 +61,6 @@ def upgrade():
                     sa.PrimaryKeyConstraint('id')
                     )
 
-    #  Categories table
-    op.create_table('categories',
-                    sa.Column('id', sa.Integer(), nullable=False),
-                    sa.Column('name', sa.String(length=50), nullable=False),
-                    sa.PrimaryKeyConstraint('id'),
-                    sa.UniqueConstraint('name')
-                    )
 
     # Images table
     # op.create_table('images',
