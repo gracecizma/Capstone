@@ -22,7 +22,7 @@ export default function CreateProduct() {
   const [imageUrl, setImageUrl] = useState('')
   const [category, setCategory] = useState(categories[0]?.id)
 
-  console.log("category?", category)
+  // console.log("category?", category)
 
   useEffect(() => {
     dispatch(getAllCategories())
@@ -40,12 +40,12 @@ export default function CreateProduct() {
     if (!description) validationErrors.description = "Description is required";
     if (description && description.length < 20) validationErrors.description = "Description must be at least 20 characters";
     if (!price) validationErrors.price = "Price is required";
-    if (!quantity) validationErrors.quantity = "Amount in stock is required";
+    if (!quantity) validationErrors.quantity = "Stock available is required";
     if (!imageUrl) validationErrors.imageUrl = "Preview image is required";
     if (imageUrl && !/\.(jpe?g|png)$/i.test(imageUrl)) {
-      validationErrors.imageURL = 'Image URL must end in .png, .jpg, or .jpeg';
+      validationErrors.imageUrl = 'Image URL must end in .png, .jpg, or .jpeg';
     }
-    // if (!category) validationErrors.category = "Category is required"
+    if (category === 1) validationErrors.category = "Category is required"
     return validationErrors;
   }
 
@@ -141,7 +141,7 @@ export default function CreateProduct() {
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
                   type="text"
-                  placeholder="must be .png, .jpg, or .jpeg file"
+                  placeholder="must be link ending in .png, .jpg, or .jpeg"
                 />
               </label>
             </div>

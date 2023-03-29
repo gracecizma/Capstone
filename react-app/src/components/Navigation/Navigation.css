@@ -37,6 +37,7 @@
   width: 230px;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
 
 .home-link,
@@ -45,6 +46,10 @@
 .profile-link {
   text-decoration: none;
   color: #e8dfd8;
+}
+
+.menu-link:hover {
+  cursor: pointer;
 }
 
 

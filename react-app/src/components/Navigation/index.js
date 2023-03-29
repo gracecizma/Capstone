@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -8,13 +8,21 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state?.session?.user);
 
 	const history = useHistory();
+	const ulRef = useRef();
 
 	const [search, setSearch] = useState("");
 
-	// const cartHandler = (e) => {
-	// 	e.preventDefault();
-	// 	history.push(`/shopping-cart/`);
-	// };
+
+	const [isOpen, setIsOpen] = useState(false);
+
+	function handleMenuToggle() {
+		setIsOpen(!isOpen);
+	}
+
+	function handleMenuItemClick(category) {
+		// Navigate to the selected category
+		console.log(`Navigating to ${category} category`);
+	}
 
 	return (
 		<>
@@ -24,7 +32,22 @@ function Navigation({ isLoaded }) {
 						<NavLink exact to="/" className="home-link">Home</NavLink>
 					</div>
 					<div className="menu">
-						<NavLink exact to="/products" className="menu-link">Menu</NavLink>
+						{/* <NavLink exact to="/products" className="menu-link">Products</NavLink> */}
+						<p
+							className="menu-link"
+							onClick={handleMenuToggle}
+						>
+							Products
+						</p>
+						{isOpen && (
+							<ul className="dropdown-menu">
+								<li onClick={() => handleMenuItemClick('All')}>All Products</li>
+								<li onClick={() => handleMenuItemClick('Breads')}>Breads</li>
+								<li onClick={() => handleMenuItemClick('Breads')}>Cookies</li>
+								<li onClick={() => handleMenuItemClick('Cakes')}>Cakes & Pies</li>
+								<li onClick={() => handleMenuItemClick('Etc')}>Assorted Sweets</li>
+							</ul>
+						)}
 					</div>
 					<div className="FAQ">
 						<NavLink exact to="/faqs" className="faq-link">FAQs</NavLink>
