@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../../store/products";
 import { getProductReviews, getUserReviews } from "../../store/reviews";
+import { addItemToCart } from "../../store/shoppingcart";
 import { useParams } from "react-router-dom";
 import ReviewModal from "../ReviewModal"
 import DeleteReviewModal from "../ReviewModal/DeleteReview";
 import OpenModalMenuItem from "../OpenModalButton/MenuItem";
 import UpdateReview from "../ReviewModal/UpdateReview";
+import AddToCart from "../ShoppingCart/AddToCart";
 import "./singleproduct.css";
 
 
@@ -25,6 +27,7 @@ export default function SingleProduct() {
   const productReviewsArr = Object.values(productReviews)
 
   const [hasReviewed, setHasReviewed] = useState(false)
+  const [quantity, setQuantity] = useState(0)
 
   // if (!product.id) dispatch(getSingleProduct(id))
 
@@ -45,6 +48,34 @@ export default function SingleProduct() {
   }
 
   const canReview = (currUser && (product.seller_id !== currUser.id) && !hasReviewed)
+
+  const maxAvailable = [];
+  for (let i = 1; i <= product.quantity; i++) {
+    maxAvailable.push(i);
+  }
+
+  const quantityUpdate = (e) => {
+    setQuantity(e.target.value);
+  };
+
+  const addCartClick = async (e) => {
+    e.preventDefault();
+
+
+    const data = {
+      user_id: currUser.id,
+      product_id: product.id,
+      quantity: quantity
+    }
+    console.log("item to be added", data)
+    await dispatch(addItemToCart(data))
+  }
+
+  const disableButton = () => {
+    if (!currUser) {
+      return true;
+    }
+  };
 
   console.log("can review?", canReview)
   return (
@@ -70,6 +101,26 @@ export default function SingleProduct() {
             </div>
             <div className="single-product-description">
               {product?.description}
+            </div>
+
+            <div className="cart-button-container">
+              <select className="select-quantity" onChange={quantityUpdate}>
+                <option>Select Quantity</option>
+                {maxAvailable.map((number) => (
+                  <option>{number}</option>
+                ))}
+              </select>
+              <button
+                className="cart-button"
+                onClick={addCartClick}
+              >
+                <OpenModalMenuItem
+                  itemText="Add to cart"
+                  itemTextClassName="cart-button-text"
+                  modalDisabled={disableButton}
+                  modalComponent={<AddToCart product={product} quantity={quantity} />}
+                />
+              </button>
             </div>
           </div>
         </div>

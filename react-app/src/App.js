@@ -11,6 +11,7 @@ import SplashPage from "./components/SplashPage/SplashPage"
 import Profile from "./components/UserProfile"
 import CreateProduct from "./components/Products/CreateProduct";
 import UpdateProduct from "./components/Products/UpdateProduct";
+import ShoppingCart from "./components/ShoppingCart";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ function App() {
             <Products />
           </Route>
           <Route path="/shopping-cart">
-            <h1>Shopping cart coming soon</h1>
+            <ShoppingCart />
           </Route>
           <Route path="/faqs">
             <h1>FAQ page coming soon</h1>
