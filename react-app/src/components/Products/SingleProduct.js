@@ -34,11 +34,11 @@ export default function SingleProduct() {
   useEffect(() => {
     dispatch(getSingleProduct(id))
     dispatch(getProductReviews(id))
-    dispatch(getUserReviews(currUser?.id))
+    if (currUser) dispatch(getUserReviews(currUser?.id))
     if (userReviewsArr.some((review) => review.product_id === product.id)) {
       setHasReviewed(true)
     }
-  }, [dispatch, currUser.id])
+  }, [dispatch, currUser?.id])
 
 
   // console.log("product id", id)
