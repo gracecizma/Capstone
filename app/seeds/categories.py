@@ -3,9 +3,6 @@ from sqlalchemy.sql import text
 
 
 def seed_categories():
-    empty = Category(
-        name="None"
-    )
     bread = Category(
         name="Bread"
     )
@@ -18,7 +15,6 @@ def seed_categories():
     sweets = Category(
         name="Etc Sweets"
     )
-    db.session.add(empty)
     db.session.add(bread)
     db.session.add(cake)
     db.session.add(cookie)

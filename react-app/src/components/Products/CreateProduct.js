@@ -150,6 +150,7 @@ export default function CreateProduct() {
               <label>What kind of treat is it? {errors.category &&
                 <span className="error-message">{errors.category}</span>}
                 <select value={category?.id} onChange={(e) => setCategory(e.target.value)}>
+                  <option>Select Category</option>
                   {categories?.map(category => (
                     <option
                       key={category?.id}
