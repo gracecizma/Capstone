@@ -16,7 +16,7 @@ def get_cart():
 
     for item in list(user_cart):
         item_dict = item.to_dict()
-        item_dict["product"] = item.products.to_dict()
+        item_dict["product"] = item.product.to_dict()
         items_list.append(item_dict)
 
     print("items_list", items_list)

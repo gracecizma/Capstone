@@ -1,13 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
-import {
-  getUserCart,
-  updateItemInCart,
-  deleteFromCart,
-} from "../../store/shoppingcart";
+import { getUserCart, updateItemInCart, deleteFromCart } from "../../store/shoppingcart";
 // import { addNewOrder } from "../../store/orders"
-import "./shoppingcart.css";
+// import "./shoppingcart.css";
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
@@ -15,7 +11,7 @@ export default function ShoppingCart() {
   console.log("cart items", userCart);
   const currUser = useSelector((state) => state?.session?.user);
   console.log("current user", currUser);
-  const history = useHistory();
+  // const history = useHistory();
 
   let cartArr;
   if (userCart) {
@@ -54,21 +50,21 @@ export default function ShoppingCart() {
     await dispatch(deleteFromCart(itemData));
   };
 
-  const orderHandler = async (e) => {
-    e.preventDefault();
+  // const orderHandler = async (e) => {
+  //   e.preventDefault();
 
-    history.push(`/orders/success`);
+  //   history.push(`/orders/success`);
 
-    return;
-  };
+  //   return;
+  // };
 
-  function maxAvailable(quantity) {
-    const maxQuantity = [];
-    for (let i = 1; i <= quantity; i++) {
-      maxQuantity.push(i);
-    }
-    return maxQuantity;
-  }
+  // function maxAvailable(quantity) {
+  //   const maxQuantity = [];
+  //   for (let i = 1; i <= quantity; i++) {
+  //     maxQuantity.push(i);
+  //   }
+  //   return maxQuantity;
+  // }
 
   const cartQuantity = (cartArr) => {
     let total = 0;
@@ -78,28 +74,29 @@ export default function ShoppingCart() {
     return total;
   };
 
-  const cartPrice = (cartArr) => {
-    let total = 0;
-    for (let item of cartArr) {
-      let itemPrice = item.quantity * item.product.price;
-      console.log("item price", itemPrice);
-      total += itemPrice;
-    }
-    return total;
-  };
+  // const cartPrice = (cartArr) => {
+  //   let total = 0;
+  //   for (let item of cartArr) {
+  //     let itemPrice = item.quantity * item.product.price;
+  //     console.log("item price", itemPrice);
+  //     total += itemPrice;
+  //   }
+  //   return total;
+  // };
 
-  if (cartQuantity === 0) {
+  let totalQuantity = cartQuantity(cartArr);
+  console.log("cart quantity", totalQuantity)
+
+  if (totalQuantity === 0) {
     return (
       <div className="empty-cart-container">
         <h1>Your cart is currently empty.</h1>
-        <NavLink to="/">Discover something unique to fill it up</NavLink>
+        <NavLink to="/products">Discover something unique to fill it up</NavLink>
       </div>
     );
   }
 
-  let totalQuantity = cartQuantity(cartArr);
-  console.log("cart array", cartArr);
-  let totalPrice = cartPrice(cartArr);
+  // let totalPrice = cartPrice(cartArr);
 
   return (
     // <h1>Welcome to your shopping cart</h1>
@@ -118,7 +115,8 @@ export default function ShoppingCart() {
             <div className="cart-preview-img-container">
               <img
                 className="cart-preview-img"
-                src={item.product?.images[0]?.url}
+                src={item.product.image_url}
+                style={{ width: "200px", height: "200px" }}
               />
             </div>
 
@@ -132,7 +130,7 @@ export default function ShoppingCart() {
                 Remove
               </button>
 
-              <div className="cart-item-quantity">
+              {/* <div className="cart-item-quantity">
                 <p className="total-text">Quantity</p>
                 <select onChange={(e) => updateHandler(e, item)}>
                   {maxAvailable(item.product.quantity).map((number) =>
@@ -143,7 +141,7 @@ export default function ShoppingCart() {
                     )
                   )}
                 </select>
-              </div>
+              </div> */}
 
               <div className="cart-item-price">
                 <div>
