@@ -13,7 +13,6 @@
   align-items: stretch;
   flex-basis: 20%;
   text-decoration: none;
-  font-family: apple-chancery;
   width: 270px;
   margin: 15px;
 }
@@ -29,7 +28,6 @@
 .product-img {
   max-width: 100%;
   height: 250px;
-  border-radius: 20px;
 }
 
 .product-details-container {

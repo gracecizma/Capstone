@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -8,13 +8,56 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state?.session?.user);
 
 	const history = useHistory();
+	const ulRef = useRef(null);
 
 	const [search, setSearch] = useState("");
+	const [isOpen, setIsOpen] = useState(false);
 
-	// const cartHandler = (e) => {
-	// 	e.preventDefault();
-	// 	history.push(`/shopping-cart/`);
-	// };
+	useEffect(() => {
+		if (!isOpen) return;
+
+		const closeMenu = (e) => {
+			if (ulRef.current && !ulRef.current.contains(e.target)) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener("click", closeMenu);
+
+		return () => document.removeEventListener("click", closeMenu);
+	}, [ulRef, isOpen]);
+
+	function handleMenuToggle() {
+		setIsOpen(!isOpen);
+	}
+
+	function handleMenuItemClick(category) {
+		if (category === 'All') {
+			history.push('/products')
+			handleMenuToggle()
+		}
+		if (category === 'Breads') {
+			history.push('/products/breads')
+			handleMenuToggle()
+		}
+		if (category === 'Cookies') {
+			history.push('/products/cookies')
+			handleMenuToggle()
+		}
+		if (category === 'Cakes') {
+			history.push('/products/cakes')
+			handleMenuToggle()
+		}
+		if (category === 'Etc') {
+			history.push('/products/sweets')
+			handleMenuToggle()
+		}
+	}
+
+	const ulClassName = "product-dropdown" + (isOpen ? "" : " hidden");
+	console.log("ulClassName", ulClassName)
+
+
 
 	return (
 		<>
@@ -24,7 +67,22 @@ function Navigation({ isLoaded }) {
 						<NavLink exact to="/" className="home-link">Home</NavLink>
 					</div>
 					<div className="menu">
-						<NavLink exact to="/products" className="menu-link">Menu</NavLink>
+						{/* <NavLink exact to="/products" className="menu-link">Products</NavLink> */}
+						<p
+							className="menu-link"
+							onClick={handleMenuToggle}
+						>
+							Products
+						</p>
+						{isOpen && (
+							<ul className={ulClassName} ref={ulRef}>
+								<li className="product-link" onClick={() => handleMenuItemClick('All')}>All Products</li>
+								<li className="product-link" onClick={() => handleMenuItemClick('Breads')}>Breads</li>
+								<li className="product-link" onClick={() => handleMenuItemClick('Cookies')}>Cookies</li>
+								<li className="product-link" onClick={() => handleMenuItemClick('Cakes')}>Cakes & Pies</li>
+								<li className="product-link" onClick={() => handleMenuItemClick('Etc')}>Assorted Sweets</li>
+							</ul>
+						)}
 					</div>
 					<div className="FAQ">
 						<NavLink exact to="/faqs" className="faq-link">FAQs</NavLink>

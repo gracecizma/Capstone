@@ -12,6 +12,10 @@ import Profile from "./components/UserProfile"
 import CreateProduct from "./components/Products/CreateProduct";
 import UpdateProduct from "./components/Products/UpdateProduct";
 import ShoppingCart from "./components/ShoppingCart";
+import Breads from "./components/Products/Categories/Breads";
+import Cookies from "./components/Products/Categories/Cookies";
+import Cake from "./components/Products/Categories/Cakes";
+import Sweets from "./components/Products/Categories/Sweets";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +38,18 @@ function App() {
           </Route>
           <Route path="/users/profile/:id">
             <Profile />
+          </Route>
+          <Route path="/products/breads">
+            <Breads />
+          </Route>
+          <Route path="/products/cakes">
+            <Cake />
+          </Route>
+          <Route path="/products/cookies">
+            <Cookies />
+          </Route>
+          <Route path="/products/sweets">
+            <Sweets />
           </Route>
           <Route path="/products/new">
             <CreateProduct />

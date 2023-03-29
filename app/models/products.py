@@ -17,6 +17,8 @@ class Product(db.Model):
     seller_id = db.Column(db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
     image_url = db.Column(db.String(1000), nullable=False)
+    category_id = db.Column(db.ForeignKey(
+        add_prefix_for_prod('categories.id')), nullable=False)
 
 
     # images = db.relationship('Image', back_populates='product')
@@ -24,6 +26,7 @@ class Product(db.Model):
     order_product = db.relationship("OrderProduct", back_populates='product')
     reviews = db.relationship("Review", back_populates="product", cascade="delete, merge, save-update")
     favorite = db.relationship("Favorite", back_populates="product", cascade="delete, merge, save-update")
+    category = db.relationship("Category", back_populates="products")
 
     def avg_rating(self):
         if len(self.reviews) == 0:
@@ -41,6 +44,7 @@ class Product(db.Model):
             'updated_at': self.updated_at,
             'seller_id': self.seller_id,
             'image_url': self.image_url,
+            'category_id': self.category_id,
             'avg_rating': self.avg_rating(),
             'total_reviews': len(self.reviews)
         }

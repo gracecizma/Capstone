@@ -47,8 +47,18 @@ def upgrade():
                     sa.Column('seller_id', sa.Integer(), nullable=False),
                     sa.Column('image_url', sa.String(
                         length=1000), nullable=False),
+                    sa.Column('category_id', sa.Integer(), nullable=False),
                     sa.ForeignKeyConstraint(['seller_id'], ['users.id'], ),
+                    sa.ForeignKeyConstraint(['category_id'], ['categories.id']),
                     sa.PrimaryKeyConstraint('id')
+                    )
+
+    #  Categories table
+    op.create_table('categories',
+                    sa.Column('id', sa.Integer(), nullable=False),
+                    sa.Column('name', sa.String(length=50), nullable=False),
+                    sa.PrimaryKeyConstraint('id'),
+                    sa.UniqueConstraint('name')
                     )
 
     # Images table

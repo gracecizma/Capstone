@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from "react-router-dom"
 import { useState } from 'react'
-import { getSingleProduct, updateProduct } from '../../store/products'
+import { getAllCategories, getSingleProduct, updateProduct } from '../../store/products'
 import './createproduct.css'
 
 
@@ -11,6 +11,10 @@ export default function UpdateProduct() {
   const product = useSelector((state) => state?.products?.singleProduct)
   console.log("single product", product)
   const currUser = useSelector((state) => state?.session?.user)
+  const categoriesObj = useSelector((state) => state?.products?.categories)
+  console.log("categories obj", categoriesObj)
+  const categories = Object.values(categoriesObj)
+  console.log("categories array", categories)
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -27,14 +31,18 @@ export default function UpdateProduct() {
   const [price, setPrice] = useState(product?.price)
   const [quantity, setQuantity] = useState(product?.quantity)
   const [imageUrl, setImageUrl] = useState(product?.image_url)
+  const [category, setCategory] = useState(product?.category_id)
+
 
   useEffect(() => {
+    dispatch(getAllCategories())
     setName(product?.name)
     setDescription(product?.description)
     setPrice(product?.price)
     setQuantity(product?.price)
     setImageUrl(product?.image_url)
-  }, [product])
+    setCategory(product?.category_id)
+  }, [dispatch, product])
 
 
   const validate = () => {
@@ -48,6 +56,10 @@ export default function UpdateProduct() {
     if (description.length < 20) {
       validationErrors.description = 'Description needs a minimum of 20 characters';
     }
+    if (imageUrl && !/\.(jpe?g|png)$/i.test(imageUrl)) {
+      validationErrors.imageUrl = 'Image URL must end in .png, .jpg, or .jpeg';
+    }
+    if (category === 1) validationErrors.category = "Category is required"
     return validationErrors;
   }
 
@@ -66,7 +78,8 @@ export default function UpdateProduct() {
         "price": parseFloat(price),
         "quantity": parseFloat(quantity),
         "seller_id": currUser.id,
-        "image_url": imageUrl
+        "image_url": imageUrl,
+        "category": category
       }
 
       await dispatch(updateProduct(updates))
@@ -147,6 +160,23 @@ export default function UpdateProduct() {
                   type="text"
                   placeholder="must be .png, .jpg, or .jpeg file"
                 />
+              </label>
+            </div>
+
+
+            <div className="create-category-container">
+              <label>What kind of treat is it? {errors.category &&
+                <span className="error-message">{errors.category}</span>}
+                <select value={category?.id} onChange={(e) => setCategory(e.target.value)}>
+                  {categories?.map(category => (
+                    <option
+                      key={category?.id}
+                      value={category?.id}
+                    >
+                      {category?.name}
+                    </option>
+                  ))}
+                </select>
               </label>
             </div>
 

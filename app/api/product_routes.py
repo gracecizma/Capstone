@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Product, db, User, Review
+from app.models import Product, db, User, Review, Category
 from app.forms import ProductForm, ImageForm
 from flask_login import current_user
 from datetime import datetime
@@ -56,6 +56,7 @@ def create_product():
         user = current_user.to_dict()
         seller_id = user['id']
         form['csrf_token'].data = request.cookies['csrf_token']
+        print(form.data)
         if form.validate_on_submit():
             product = Product(
                 name=form.data['name'],
@@ -64,9 +65,11 @@ def create_product():
                 quantity=form.data['quantity'],
                 seller_id=seller_id,
                 image_url=form.data['image_url'],
+                category_id=form.data['category_id'],
                 created_at=datetime.utcnow(),
                 updated_at=datetime.utcnow(),
             )
+            print(product.to_dict())
             db.session.add(product)
             db.session.commit()
             return product.to_dict()
@@ -88,6 +91,7 @@ def update_product(id):
             product.description = form.data['description']
             product.price = form.data['price']
             product.quantity = form.data['quantity']
+            product.category_id = form.data['category_id']
             product.seller_id = seller_id
             product.updated_at = datetime.utcnow()
             db.session.add(product)
@@ -102,3 +106,10 @@ def update_product(id):
 def product_reviews(id):
     reviews = Review.query.filter_by(product_id=id).all()
     return [review.to_dict() for review in reviews]
+
+
+# get all categories
+@product_routes.route('/categories')
+def get_categories():
+    categories = Category.query.all()
+    return {'categories': [category.to_dict() for category in categories]}

@@ -37,6 +37,7 @@
   width: 230px;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
 
 .home-link,
@@ -45,6 +46,37 @@
 .profile-link {
   text-decoration: none;
   color: #e8dfd8;
+}
+
+.menu-link:hover {
+  cursor: pointer;
+}
+
+.product-dropdown.hidden {
+  display: none
+}
+
+.product-dropdown {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  border-radius: 10px;
+  border: solid 1px #f9f0fb;
+  background-color: white;
+  list-style-type: none;
+  left: 1.5%;
+  top: 35px;
+  padding: 5px 15px;
+  height: 200px;
+  max-width: 150px;
+  font-size: 15px;
+}
+
+.product-link:hover {
+  cursor: pointer;
 }
 
 

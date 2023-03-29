@@ -4,6 +4,7 @@ const GET_PRODUCTS_BY_USER = "products/GET_PRODUCTS_BY_USER";
 const REMOVE_PRODUCT = "products/REMOVE_PRODUCT";
 const CREATE_PRODUCT = "products/CREATE_PRODUCT";
 const UPDATE_PRODUCT = "products/UPDATE_PRODUCT";
+const GET_CATEGORIES = "products/GET_CATEGORIES"
 
 
 // Actions
@@ -50,8 +51,30 @@ const editProduct = (product) => {
   }
 };
 
+const loadCategories = (categories) => {
+  return {
+    type: GET_CATEGORIES,
+    payload: categories
+  }
+};
+
 
 // Thunks
+
+export const getAllCategories = () => async (dispatch) => {
+  const res = await fetch('/api/products/categories')
+
+  if (res.ok) {
+    const data = await res.json()
+    console.log("categories fetch", data)
+    let obj = {}
+    data.categories.forEach((category) => {
+      obj[category.id] = category
+    })
+    dispatch(loadCategories(obj))
+  }
+};
+
 
 export const getAllProducts = () => async (dispatch) => {
   const res = await fetch('/api/products')
@@ -120,9 +143,11 @@ export const createNewProduct = (newProduct) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newProduct)
   })
+  console.log("created product res", res)
 
   if (res.ok) {
     const data = await res.json()
+    console.log("created product", data)
     dispatch(createProduct(data))
     return data
   }
@@ -149,12 +174,18 @@ export const updateProduct = (product) => async (dispatch) => {
 const initialState = {
   allProducts: {},
   singleProduct: {},
-  userProducts: {}
+  userProducts: {},
+  categories: {}
 }
 
 export default function productsReducer(state = initialState, action) {
   let newState = { ...state }
   switch (action.type) {
+    case GET_CATEGORIES: {
+      newState.categories = action.payload
+      console.log("categories state", newState)
+      return newState
+    }
     case GET_PRODUCTS: {
       // const newState = { ...state, allProducts: { ...state.allProducts }, singleProduct: { ...state.singleProduct }, userProducts: { ...state.userProducts } }
       newState.allProducts = action.payload
