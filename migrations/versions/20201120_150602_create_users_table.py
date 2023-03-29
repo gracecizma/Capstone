@@ -37,7 +37,7 @@ def upgrade():
     #  Categories table
     op.create_table('categories',
                     sa.Column('id', sa.Integer(), nullable=False),
-                    sa.Column('name', sa.Integer(), nullable=False),
+                    sa.Column('name', sa.String(length=50), nullable=False),
                     sa.PrimaryKeyConstraint('id'),
                     sa.UniqueConstraint('name')
                     )
