@@ -4,3 +4,4 @@ from .product import ProductForm
 from .image import ImageForm
 from .new_review_form import NewReviewForm
 from .update_review_form import UpdateReviewForm
+from .add_to_cart import AddToCart
