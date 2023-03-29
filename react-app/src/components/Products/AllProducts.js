@@ -11,13 +11,13 @@ export default function Products() {
   const productsArr = Object.values(products)
   console.log("products array", productsArr)
 
-  if (!productsArr.length) dispatch(getAllProducts())
+  // if (!productsArr.length) dispatch(getAllProducts())
 
-  // useEffect(() => {
-  //   dispatch(getAllProducts())
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(getAllProducts())
+  }, [dispatch])
 
-  // if (!productsArr.length) return null
+  if (!productsArr.length) return null
 
   return (
     <>
