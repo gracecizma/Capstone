@@ -45,7 +45,6 @@ export default function CreateProduct() {
     if (imageUrl && !/\.(jpe?g|png)$/i.test(imageUrl)) {
       validationErrors.imageUrl = 'Image URL must end in .png, .jpg, or .jpeg';
     }
-    if (category === 1) validationErrors.category = "Category is required"
     return validationErrors;
   }
 
@@ -150,6 +149,7 @@ export default function CreateProduct() {
               <label>What kind of treat is it? {errors.category &&
                 <span className="error-message">{errors.category}</span>}
                 <select value={category?.id} onChange={(e) => setCategory(e.target.value)}>
+                  <option>Select Category</option>
                   {categories?.map(category => (
                     <option
                       key={category?.id}

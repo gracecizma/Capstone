@@ -59,7 +59,6 @@ export default function UpdateProduct() {
     if (imageUrl && !/\.(jpe?g|png)$/i.test(imageUrl)) {
       validationErrors.imageUrl = 'Image URL must end in .png, .jpg, or .jpeg';
     }
-    if (category === 1) validationErrors.category = "Category is required"
     return validationErrors;
   }
 
