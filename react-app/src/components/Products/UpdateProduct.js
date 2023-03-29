@@ -27,6 +27,7 @@ export default function UpdateProduct() {
   const [price, setPrice] = useState(product?.price)
   const [quantity, setQuantity] = useState(product?.quantity)
   const [imageUrl, setImageUrl] = useState(product?.image_url)
+  const [category, setCategory] = useState(product?.category)
 
   useEffect(() => {
     setName(product?.name)
@@ -66,7 +67,8 @@ export default function UpdateProduct() {
         "price": parseFloat(price),
         "quantity": parseFloat(quantity),
         "seller_id": currUser.id,
-        "image_url": imageUrl
+        "image_url": imageUrl,
+        "category": category
       }
 
       await dispatch(updateProduct(updates))
@@ -147,6 +149,47 @@ export default function UpdateProduct() {
                   type="text"
                   placeholder="must be .png, .jpg, or .jpeg file"
                 />
+              </label>
+            </div>
+
+
+            <div className="create-category-container">
+              <label>What kind of treat is it? {errors.category &&
+                <span className="error-message">{errors.category}</span>}
+                <select
+                  value={category}
+
+
+                >
+                  <option>Select category</option>
+                  <option
+                    className="breads"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    Breads
+                  </option>
+                  <option
+                    className="cookies"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    Cookies
+                  </option>
+                  <option
+                    className="cakes-pies"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    Cakes/Pies
+                  </option>
+                  <option
+                    className="etc-sweets"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    Etc Sweets</option>
+                </select>
               </label>
             </div>
 

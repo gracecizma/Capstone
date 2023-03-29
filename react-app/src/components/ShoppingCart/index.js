@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { getUserCart, updateItemInCart, deleteFromCart } from "../../store/shoppingcart";
 // import { addNewOrder } from "../../store/orders"
-// import "./shoppingcart.css";
+import "./cart.css";
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
@@ -58,13 +58,13 @@ export default function ShoppingCart() {
   //   return;
   // };
 
-  // function maxAvailable(quantity) {
-  //   const maxQuantity = [];
-  //   for (let i = 1; i <= quantity; i++) {
-  //     maxQuantity.push(i);
-  //   }
-  //   return maxQuantity;
-  // }
+  function maxAvailable(quantity) {
+    const maxQuantity = [];
+    for (let i = 1; i <= quantity; i++) {
+      maxQuantity.push(i);
+    }
+    return maxQuantity;
+  }
 
   const cartQuantity = (cartArr) => {
     let total = 0;
@@ -91,7 +91,7 @@ export default function ShoppingCart() {
     return (
       <div className="empty-cart-container">
         <h1>Your cart is currently empty.</h1>
-        <NavLink to="/products">Discover something unique to fill it up</NavLink>
+        <NavLink to="/products">Continue shopping</NavLink>
       </div>
     );
   }
@@ -110,6 +110,12 @@ export default function ShoppingCart() {
       </div>
 
       <div className="cart-items-container">
+        <div className="cart-items-header">
+          <p>Product</p>
+          <p>Price</p>
+          <p>Qty</p>
+          <p>Total</p>
+        </div>
         {cartArr?.map((item) => (
           <div key={item.id} className="single-cart-item-container">
             <div className="cart-preview-img-container">
@@ -123,14 +129,13 @@ export default function ShoppingCart() {
             <div className="cart-item-info">
               <h3>{item.product.name}</h3>
 
-              <button
-                className="remove-from-cart-button form-button"
-                onClick={(e) => deleteHandler(e, item)}
-              >
-                Remove
-              </button>
 
-              {/* <div className="cart-item-quantity">
+
+              <div className="cart-item-price">
+                ${parseFloat(item.product.price).toFixed(2)}
+              </div>
+
+              <div className="cart-item-quantity">
                 <p className="total-text">Quantity</p>
                 <select onChange={(e) => updateHandler(e, item)}>
                   {maxAvailable(item.product.quantity).map((number) =>
@@ -141,9 +146,9 @@ export default function ShoppingCart() {
                     )
                   )}
                 </select>
-              </div> */}
+              </div>
 
-              <div className="cart-item-price">
+              <div className="cart-item-total-price">
                 <div>
                   ${parseFloat(item.product.price * item.quantity).toFixed(2)}
                 </div>
@@ -153,6 +158,14 @@ export default function ShoppingCart() {
                   ""
                 )}
               </div>
+
+              <button
+                className="remove-from-cart-button"
+                onClick={(e) => deleteHandler(e, item)}
+              >
+                Remove
+              </button>
+
             </div>
           </div>
         ))}

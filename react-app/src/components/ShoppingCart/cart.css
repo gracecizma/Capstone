@@ -1,0 +1,31 @@
+.full-cart-container {
+  margin: 50px;
+}
+
+.cart-quantity-header {}
+
+.cart-items-container {}
+
+.cart-items-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.single-cart-item-container {}
+
+.cart-preview-img-container {}
+
+.cart-preview-img {}
+
+.cart-item-info {}
+
+.cart-item-price {}
+
+.cart-item-quantity {}
+
+.total-text {}
+
+.cart-item-total-price {}
+
+.remove-from-cart-button {}

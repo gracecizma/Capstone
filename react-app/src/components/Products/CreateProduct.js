@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewProduct } from "../../store/products";
+import { createNewProduct, getAllCategories } from "../../store/products";
 import "./createproduct.css"
 
 
@@ -9,10 +9,10 @@ export default function CreateProduct() {
   const dispatch = useDispatch()
   const history = useHistory()
   const currUser = useSelector((state) => state?.session?.user)
-
-  if (!currUser) {
-    history.push("/login")
-  }
+  const categoriesObj = useSelector((state) => state?.products?.categories)
+  console.log("categories obj", categoriesObj)
+  const categories = Object.values(categoriesObj)
+  console.log("categories array", categories)
 
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('')
@@ -20,6 +20,19 @@ export default function CreateProduct() {
   const [price, setPrice] = useState('')
   const [quantity, setQuantity] = useState('')
   const [imageUrl, setImageUrl] = useState('')
+  const [category, setCategory] = useState(categories[0]?.id)
+
+  console.log("category?", category)
+
+  useEffect(() => {
+    dispatch(getAllCategories())
+  }, [dispatch])
+
+
+  if (!currUser) {
+    history.push("/login")
+  }
+
 
   const validate = () => {
     const validationErrors = {};
@@ -32,8 +45,10 @@ export default function CreateProduct() {
     if (imageUrl && !/\.(jpe?g|png)$/i.test(imageUrl)) {
       validationErrors.imageURL = 'Image URL must end in .png, .jpg, or .jpeg';
     }
+    // if (!category) validationErrors.category = "Category is required"
     return validationErrors;
   }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,10 +62,12 @@ export default function CreateProduct() {
         "price": parseFloat(price),
         "quantity": parseFloat(quantity),
         "seller_id": currUser.id,
-        "image_url": imageUrl
+        "image_url": imageUrl,
+        "category_id": category
       }
 
       const newProductObj = await dispatch(createNewProduct(product))
+      // console.log("new product obj", newProductObj)
       if (newProductObj) history.push(`/products/${newProductObj.id}`)
     } else {
       return;
@@ -126,6 +143,22 @@ export default function CreateProduct() {
                   type="text"
                   placeholder="must be .png, .jpg, or .jpeg file"
                 />
+              </label>
+            </div>
+
+            <div className="create-category-container">
+              <label>What kind of treat is it? {errors.category &&
+                <span className="error-message">{errors.category}</span>}
+                <select value={category?.id} onChange={(e) => setCategory(e.target.value)}>
+                  {categories?.map(category => (
+                    <option
+                      key={category?.id}
+                      value={category?.id}
+                    >
+                      {category?.name}
+                    </option>
+                  ))}
+                </select>
               </label>
             </div>
 
