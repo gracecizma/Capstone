@@ -21,25 +21,31 @@ export default function SingleProduct() {
   const userReviews = useSelector((state) => state?.reviews?.userReviews)
   // console.log("user reviews", userReviews)
   const userReviewsArr = Object.values(userReviews)
-  console.log("user reviews array", userReviewsArr)
+  // console.log("user reviews array", userReviewsArr)
   const productReviews = useSelector((state) => state?.reviews?.productReviews)
   // console.log("product reviews", productReviews)
   const productReviewsArr = Object.values(productReviews)
 
-  const [hasReviewed, setHasReviewed] = useState(false)
   const [quantity, setQuantity] = useState(0)
-
-  // if (!product.id) dispatch(getSingleProduct(id))
+  const [hasReviewed, setHasReviewed] = useState(() => {
+    // Retrieve the value from localStorage, default to false if it doesn't exist
+    return localStorage.getItem(`hasReviewed_${currUser?.id}_${product.id}`) === "true" || false
+  })
 
   useEffect(() => {
     dispatch(getSingleProduct(id))
     dispatch(getProductReviews(id))
-    if (currUser) dispatch(getUserReviews(currUser?.id))
-    if (userReviewsArr.some((review) => review.product_id === product.id)) {
-      setHasReviewed(true)
-    }
+    if (currUser) dispatch(getUserReviews(currUser.id))
   }, [dispatch, currUser?.id])
 
+  useEffect(() => {
+    if (userReviewsArr?.some((review) => review.product_id === product.id)) {
+      setHasReviewed(true)
+      localStorage.setItem(`hasReviewed_${currUser?.id}_${product.id}`, "true")
+    }
+  }, [userReviewsArr])
+
+  const canReview = (currUser && (product.seller_id !== currUser.id) && !hasReviewed)
 
   // console.log("product id", id)
 
@@ -47,7 +53,6 @@ export default function SingleProduct() {
     dispatch(deleteReview(reviewId))
   }
 
-  const canReview = (currUser && (product.seller_id !== currUser.id) && !hasReviewed)
 
   const maxAvailable = [];
   for (let i = 1; i <= product.quantity; i++) {

@@ -68,7 +68,7 @@ export const getUserReviews = (id) => async (dispatch) => {
 
   if (res.ok) {
     const reviews = await res.json()
-    // console.log("user reviews fetch", reviews)
+    console.log("user reviews fetch", reviews)
     dispatch(loadReviewsByUser(reviews))
   }
 };
