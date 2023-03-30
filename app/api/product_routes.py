@@ -91,8 +91,8 @@ def update_product(id):
             product.description = form.data['description']
             product.price = form.data['price']
             product.quantity = form.data['quantity']
-            product.category_id = form.data['category_id']
             product.seller_id = seller_id
+            product.category_id = form.data['category_id']
             product.updated_at = datetime.utcnow()
             db.session.add(product)
             db.session.commit()

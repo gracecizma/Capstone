@@ -15,6 +15,7 @@ def seed_categories():
     sweets = Category(
         name="Etc Sweets"
     )
+
     db.session.add(bread)
     db.session.add(cake)
     db.session.add(cookie)
