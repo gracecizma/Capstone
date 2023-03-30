@@ -24,6 +24,11 @@ export default function Products() {
       <div className="products-div">
         {productsArr.map(product => (
           <Link key={product?.id} to={`/products/${product?.id}`} className="product-tile">
+            <div className="product-name-container">
+              <p className="product-name">
+                {product?.name}
+              </p>
+            </div>
             <div className="product-img-container">
               <img
                 className="product-img"
@@ -31,10 +36,7 @@ export default function Products() {
             </div>
 
             <div className="product-details-container">
-              <div className="product-name-rating-price">
-                <p className="product-name">
-                  {product?.name}
-                </p>
+              <div className="product-rating-container">
                 <p className="product-rating">
                   Rating:{product?.avg_rating ? ' ★ ' + Number(product?.avg_rating).toFixed(1) : '★ New'}
                 </p>
@@ -43,10 +45,10 @@ export default function Products() {
                   {product?.total_reviews === 1 ? product?.total_reviews + ' review' : ""}
                   {product?.total_reviews > 1 ? product?.total_reviews + ' reviews' : ""}
                 </p>
-                <p className="product-price">
-                  ${product?.price}
-                </p>
               </div>
+              <p className="product-price">
+                ${(product?.price).toFixed(2)}
+              </p>
             </div>
           </Link>
         ))}

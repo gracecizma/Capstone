@@ -56,6 +56,11 @@ export default function Profile() {
       <div className="products-div">
         {productsArr.map(product => (
           <Link key={product.id} to={`/products/${product.id}`} className="product-tile">
+            <div className="product-name-container">
+              <p className="product-name">
+                {product.name}
+              </p>
+            </div>
             <div className="product-img-container">
               <img
                 className="product-img"
@@ -63,10 +68,7 @@ export default function Profile() {
             </div>
 
             <div className="product-details-container">
-              <div className="product-name-rating-price">
-                <p className="product-name">
-                  {product.name}
-                </p>
+              <div className="product-rating-price">
                 <p className="product-rating">
                   Rating:{product.avg_rating ? ' ★ ' + Number(product.avg_rating).toFixed(1) : '★ New'}
                 </p>

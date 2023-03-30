@@ -15,7 +15,15 @@
   text-decoration: none;
   width: 270px;
   margin: 15px;
+  background-color: #fff6ef;
 }
+
+.product-name-container {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
 
 .product-img-container {
   display: flex;
@@ -37,4 +45,21 @@
   padding: 2px;
   height: 80px;
   width: 270px;
+}
+
+.product-rating-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 30px;
+}
+
+.product-total-reviews {
+  margin-top: 20px;
+}
+
+.product-price {
+  display: flex;
+  justify-content: center;
 }
