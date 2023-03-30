@@ -13,14 +13,12 @@ export default function Cake() {
 
   if (!productsArr.length) dispatch(getAllProducts())
 
-  let cakeObj = {};
+  let cakeArr = [];
   productsArr?.forEach((product) => {
-    if (product.category_id === 3) {
-      cakeObj[product.id] = product
+    if (product.category_id === 2) {
+      cakeArr.push(product)
     }
   })
-
-  let cakeArr = Object.values(cakeObj)
 
 
   return (

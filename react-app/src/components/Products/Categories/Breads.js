@@ -15,7 +15,7 @@ export default function Breads() {
 
   let breadObj = {};
   productsArr?.forEach((product) => {
-    if (product.category_id === 2) {
+    if (product.category_id === 1) {
       breadObj[product.id] = product
     }
   })

@@ -13,14 +13,14 @@ export default function Cookies() {
 
   if (!productsArr.length) dispatch(getAllProducts())
 
-  let cookieObj = {};
+  let cookieArr = [];
   productsArr?.forEach((product) => {
-    if (product.category_id === 4) {
-      cookieObj[product.id] = product
+    if (product.category_id === 3) {
+      cookieArr.push(product)
     }
   })
 
-  let cookieArr = Object.values(cookieObj)
+
 
 
   return (
