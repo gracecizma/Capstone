@@ -13,14 +13,14 @@ export default function Sweets() {
 
   if (!productsArr.length) dispatch(getAllProducts())
 
-  let sweetsObj = {};
+  let sweetsArr = [];
   productsArr?.forEach((product) => {
-    if (product.category_id === 5) {
-      sweetsObj[product.id] = product
+    if (product.category_id === 4) {
+      sweetsArr.push(product)
     }
   })
 
-  let sweetsArr = Object.values(sweetsObj)
+
 
 
   return (
