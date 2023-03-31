@@ -1,3 +1,5 @@
+import { getSingleProduct } from "./products"
+
 const GET_SINGLE_REVIEW = "reviews/GET_SINGLE_REVIEW"
 const GET_USER_REVIEWS = "reviews/GET_USER_REVIEWS"
 const GET_PRODUCT_REVIEWS = "reviews/GET_PRODUCT_REVIEWS"
@@ -95,6 +97,7 @@ export const deleteReview = (review) => async (dispatch) => {
     dispatch(removeReview(data));
     dispatch(getUserReviews(review.user_id))
     dispatch(getProductReviews(review.product_id))
+    dispatch(getSingleProduct(review.product_id))
     return review
   }
 };
@@ -113,6 +116,7 @@ export const createNewReview = (newReview) => async (dispatch) => {
     dispatch(createReview(data))
     dispatch(getUserReviews(newReview.user_id))
     dispatch(getProductReviews(newReview.product_id))
+    dispatch(getSingleProduct(newReview.product_id))
   }
 };
 
@@ -129,6 +133,7 @@ export const updateReview = (review) => async (dispatch) => {
     dispatch(editReview(data))
     dispatch(getUserReviews(review.user_id))
     dispatch(getProductReviews(review.product_id))
+    dispatch(getSingleProduct(review.product_id))
   }
 };
 
