@@ -102,7 +102,7 @@ export default function SingleProduct() {
               {product && product?.total_reviews !== 1 ? product?.total_reviews + ' reviews' : ""}
             </div>
             <div className="single-product-price">
-              ${product?.price}
+              ${parseFloat(product?.price).toFixed(2)}
             </div>
             <div className="single-product-description">
               {product?.description}
