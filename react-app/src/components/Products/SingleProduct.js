@@ -21,25 +21,31 @@ export default function SingleProduct() {
   const userReviews = useSelector((state) => state?.reviews?.userReviews)
   // console.log("user reviews", userReviews)
   const userReviewsArr = Object.values(userReviews)
-  console.log("user reviews array", userReviewsArr)
+  // console.log("user reviews array", userReviewsArr)
   const productReviews = useSelector((state) => state?.reviews?.productReviews)
   // console.log("product reviews", productReviews)
   const productReviewsArr = Object.values(productReviews)
 
-  const [hasReviewed, setHasReviewed] = useState(false)
   const [quantity, setQuantity] = useState(0)
-
-  // if (!product.id) dispatch(getSingleProduct(id))
+  const [hasReviewed, setHasReviewed] = useState(() => {
+    // Retrieve the value from localStorage, default to false if it doesn't exist
+    return localStorage.getItem(`hasReviewed_${currUser?.id}_${product.id}`) === "true" || false
+  })
 
   useEffect(() => {
     dispatch(getSingleProduct(id))
     dispatch(getProductReviews(id))
-    if (currUser) dispatch(getUserReviews(currUser?.id))
-    if (userReviewsArr.some((review) => review.product_id === product.id)) {
-      setHasReviewed(true)
-    }
+    if (currUser) dispatch(getUserReviews(currUser.id))
   }, [dispatch, currUser?.id])
 
+  useEffect(() => {
+    if (userReviewsArr?.some((review) => review.product_id === product.id)) {
+      setHasReviewed(true)
+      localStorage.setItem(`hasReviewed_${currUser?.id}_${product.id}`, "true")
+    }
+  }, [userReviewsArr])
+
+  const canReview = (currUser && (product.seller_id !== currUser.id) && !hasReviewed)
 
   // console.log("product id", id)
 
@@ -47,7 +53,6 @@ export default function SingleProduct() {
     dispatch(deleteReview(reviewId))
   }
 
-  const canReview = (currUser && (product.seller_id !== currUser.id) && !hasReviewed)
 
   const maxAvailable = [];
   for (let i = 1; i <= product.quantity; i++) {
@@ -82,91 +87,95 @@ export default function SingleProduct() {
     <>
       <div className="single-product-div">
         <div className="single-product-container">
-          <div className="single-product-image-container">
-            <img className="single-product-image" src={product?.image_url} />
-          </div>
-          <div className="single-product-info-container">
-            <h2 className="single-product-name">
-              {product?.name}
-            </h2>
-            <div className="single-product-rating">
-              {product?.avg_rating ? ' ★ ' + Number(product?.avg_rating).toFixed(1) : '★ New'}
+          <div className="single-product-img-info">
+            <div className="single-product-image-container">
+              <img className="single-product-image" src={product?.image_url} />
             </div>
-            <div className="num-reviews">
+            <div className="single-product-info-container">
+              <h2 className="single-product-name">
+                {product?.name}
+              </h2>
+              <div className="single-product-rating">
+                {product?.avg_rating ? ' ★ ' + Number(product?.avg_rating).toFixed(1) : '★ New'}
+              </div>
+              <div className="num-reviews">
+                {product && product?.total_reviews === 1 ? product?.total_reviews + ' review' : ""}
+                {product && product?.total_reviews !== 1 ? product?.total_reviews + ' reviews' : ""}
+              </div>
+              <div className="single-product-price">
+                ${parseFloat(product?.price).toFixed(2)}
+              </div>
+              <div className="single-product-description">
+                {product?.description}
+              </div>
+
+              <div className="cart-button-container">
+                <select className="select-quantity" onChange={quantityUpdate}>
+                  <option>Select Quantity</option>
+                  {maxAvailable.map((number) => (
+                    <option>{number}</option>
+                  ))}
+                </select>
+                <button
+                  className="cart-button"
+                  onClick={addCartClick}
+                >
+                  <OpenModalMenuItem
+                    itemText="Add to cart"
+                    itemTextClassName="cart-button-text"
+                    modalDisabled={disableButton}
+                    modalComponent={<AddToCart product={product} quantity={quantity} />}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="reviews-container">
+            <div className="reviews-header">
               {product && product?.total_reviews === 1 ? product?.total_reviews + ' review' : ""}
               {product && product?.total_reviews !== 1 ? product?.total_reviews + ' reviews' : ""}
             </div>
-            <div className="single-product-price">
-              ${product?.price}
+            <div className="post-review-container">
+              {canReview && (
+                <button
+                  className="post-review-button"
+                >
+                  <OpenModalMenuItem
+                    itemText="Post your review"
+                    itemTextClassName="review-button-text"
+                    modalComponent={<ReviewModal productId={product?.id} />}
+                  />
+                </button>
+              )}
             </div>
-            <div className="single-product-description">
-              {product?.description}
-            </div>
-
-            <div className="cart-button-container">
-              <select className="select-quantity" onChange={quantityUpdate}>
-                <option>Select Quantity</option>
-                {maxAvailable.map((number) => (
-                  <option>{number}</option>
-                ))}
-              </select>
-              <button
-                className="cart-button"
-                onClick={addCartClick}
-              >
-                <OpenModalMenuItem
-                  itemText="Add to cart"
-                  itemTextClassName="cart-button-text"
-                  modalDisabled={disableButton}
-                  modalComponent={<AddToCart product={product} quantity={quantity} />}
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="reviews-container">
-          <div className="reviews-header">
-            {product && product?.total_reviews === 1 ? product?.total_reviews + ' review' : ""}
-            {product && product?.total_reviews !== 1 ? product?.total_reviews + ' reviews' : ""}
-          </div>
-          <div className="post-review-container">
-            {canReview && (
-              <button
-                className="post-review-button"
-              >
-                <OpenModalMenuItem
-                  itemText="Post your review"
-                  itemTextClassName="review-button-text"
-                  modalComponent={<ReviewModal productId={product?.id} />}
-                />
-              </button>
-            )}
-          </div>
-          <div className="product-reviews-container">
-            {!product?.total_reviews && canReview ? "Be the first to post a review!" : ""}
-            {productReviewsArr?.slice(0).reverse().map(review => (
-              <div key={review.id} className="single-review">
-                <div className="review-username">{review?.author?.username}</div>
-                <div className="review-rating">{review?.stars + ' ★ '}</div>
-                <div className="review-text">{review?.comment}</div>
-                {currUser && review?.user_id === currUser.id && (
-                  <div className="update-delete-reviews">
-                    <button className="delete-review-button">
-                      <OpenModalMenuItem
-                        itemText="Delete"
-                        modalComponent={<DeleteReviewModal review={review} />}
-                      />
-                    </button>
-                    <button className="update-review-button">
-                      <OpenModalMenuItem
-                        itemText="Update"
-                        modalComponent={<UpdateReview review={review} />}
-                      />
-                    </button>
+            <div className="single-reviews-container">
+              {!product?.total_reviews && canReview ? "Be the first to post a review!" : ""}
+              {productReviewsArr?.slice(0).reverse().map(review => (
+                <div key={review.id} className="single-review">
+                  <div className="user-rating-container">
+                    <div className="review-username">{review?.author?.username}</div>
+                    <div className="review-rating">{' ★ ' + review?.stars}</div>
                   </div>
-                )}
-              </div>
-            ))}
+                  <div className="review-text">{review?.comment}</div>
+                  {currUser && review?.user_id === currUser.id && (
+                    <div className="update-delete-reviews">
+                      <button className="delete-review-button">
+                        <OpenModalMenuItem
+                          itemText="Delete"
+                          modalComponent={<DeleteReviewModal review={review} />}
+                        />
+                      </button>
+                      <button className="update-review-button">
+                        <OpenModalMenuItem
+                          itemText="Update"
+                          modalComponent={<UpdateReview review={review} />}
+                        />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

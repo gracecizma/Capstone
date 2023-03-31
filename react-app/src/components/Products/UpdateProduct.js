@@ -39,7 +39,7 @@ export default function UpdateProduct() {
     setName(product?.name)
     setDescription(product?.description)
     setPrice(product?.price)
-    setQuantity(product?.price)
+    setQuantity(product?.quantity)
     setImageUrl(product?.image_url)
     setCategory(product?.category_id)
   }, [dispatch, product])
@@ -78,7 +78,7 @@ export default function UpdateProduct() {
         "quantity": parseFloat(quantity),
         "seller_id": currUser.id,
         "image_url": imageUrl,
-        "category": category
+        "category_id": category
       }
 
       await dispatch(updateProduct(updates))

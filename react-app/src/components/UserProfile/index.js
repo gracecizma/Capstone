@@ -53,40 +53,42 @@ export default function Profile() {
           <button>Create</button>
         </Link>
       </div>
-      <div className="products-div">
+      <div className="user-products-div">
         {productsArr.map(product => (
           <Link key={product.id} to={`/products/${product.id}`} className="product-tile">
-            <div className="product-img-container">
+            <div className="user-product-name-container">
+              <p className="user-product-name">
+                {product.name}
+              </p>
+            </div>
+            <div className="user-product-img-container">
               <img
-                className="product-img"
+                className="user-product-img"
                 src={product.image_url} />
             </div>
 
-            <div className="product-details-container">
-              <div className="product-name-rating-price">
-                <p className="product-name">
-                  {product.name}
-                </p>
-                <p className="product-rating">
+            <div className="user-product-details-container">
+              <div className="user-product-rating-price">
+                <p className="user-product-rating">
                   Rating:{product.avg_rating ? ' ★ ' + Number(product.avg_rating).toFixed(1) : '★ New'}
                 </p>
-                <p className="product-price">
+                <p className="user-product-price">
                   ${product.price}
                 </p>
-                <div className="edit-delete-buttons">
-                  <Link to={`/products/${product.id}/edit`}>
-                    <button className="edit-product-button">Update</button>
-                  </Link>
-                  <button
-                    className="delete-button"
-                    onClick={handleDelete}
-                  >
-                    <OpenModalMenuItem
-                      itemText="Delete"
-                      modalComponent={<DeleteProductModal product={product} />}
-                    />
-                  </button>
-                </div>
+              </div>
+              <div className="edit-delete-buttons">
+                <Link to={`/products/${product.id}/edit`}>
+                  <button className="edit-product-button">Update</button>
+                </Link>
+                <button
+                  className="delete-button"
+                  onClick={handleDelete}
+                >
+                  <OpenModalMenuItem
+                    itemText="Delete"
+                    modalComponent={<DeleteProductModal product={product} />}
+                  />
+                </button>
               </div>
             </div>
           </Link>

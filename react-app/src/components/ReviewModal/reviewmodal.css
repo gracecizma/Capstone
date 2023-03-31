@@ -1,0 +1,46 @@
+.star.off {
+  color: #ccc;
+  margin-right: 5px;
+  transition: color 0.2s;
+}
+
+.star.on {
+  color: #fdd835;
+}
+
+.stars-container {
+  display: flex;
+  justify-content: center;
+}
+
+.stars-container:hover {
+  cursor: pointer;
+}
+
+.review-submit {
+  display: flex;
+  justify-content: center;
+}
+
+.submit-review-button {
+  border-radius: 5px;
+  height: 30px;
+}
+
+.submit-review-button:hover {
+  cursor: pointer;
+}
+
+#modal-content {
+  border-radius: 5px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: center;
+}
+
+.delete-review-button,
+.update-review-button {
+  list-style-type: none;
+}

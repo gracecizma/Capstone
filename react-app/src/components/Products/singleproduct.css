@@ -1,10 +1,19 @@
 .single-product-div {
   margin: 70px;
+  display: flex;
+  justify-content: center;
 }
 
 .single-product-container {
   display: flex;
+  flex-direction: column;
+  max-width: 950px;
+}
+
+.single-product-img-info {
+  display: flex;
   flex-direction: row;
+
 }
 
 /* Styles for product image */
@@ -16,15 +25,17 @@
 .single-product-image {
   display: block;
   max-width: 100%;
+  min-width: 350px;
   height: auto;
   margin: 0 auto;
 }
 
 /* Styles for product details */
 .single-product-info-container {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
+  max-width: 300px;
+  text-align: left;
+  margin-left: 20px;
+  margin-right: 20px;
 
 }
 
@@ -66,30 +77,34 @@
 }
 
 /* Styles for product reviews */
-.product-reviews {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.product-reviews h2 {
-  font-size: 24px;
-  font-weight: bold;
+.reviews-container {
+  max-width: 950px;
+  min-width: 350px;
   margin-top: 20px;
 }
 
-.review {
-  margin-top: 20px;
+.single-review {
+  border: solid 1px #332013;
+  border-radius: 5px;
+
 }
 
-.review-author {
+.review-rating {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.user-rating-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.review-username {
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.review-date {
-  font-size: 14px;
-  margin-bottom: 5px;
+  margin-top: 6px;
 }
 
 .review-text {

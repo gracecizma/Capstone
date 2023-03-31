@@ -14,15 +14,26 @@
   flex-basis: 20%;
   text-decoration: none;
   width: 270px;
+  height: 375px;
   margin: 15px;
+  background-color: #f7ede6;
+  border-radius: 5px;
+  border: solid 1px #332013;
 }
+
+.product-name-container {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  color: black;
+}
+
 
 .product-img-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px;
-  width: 270px;
+  width: 100%;
 }
 
 .product-img {
@@ -37,4 +48,31 @@
   padding: 2px;
   height: 80px;
   width: 270px;
+  color: black;
+}
+
+.product-rating-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 30px;
+}
+
+.product-total-reviews {
+  margin-top: 20px;
+}
+
+.price-and-cart-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 35px;
+}
+
+.cart-button {
+  list-style-type: none;
+  margin-left: 15px;
+  margin-top: 7px;
+  height: 35px;
 }
