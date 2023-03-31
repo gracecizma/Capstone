@@ -30,3 +30,17 @@
 .submit-review-button:hover {
   cursor: pointer;
 }
+
+#modal-content {
+  border-radius: 5px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: center;
+}
+
+.delete-review-button,
+.update-review-button {
+  list-style-type: none;
+}
