@@ -45,7 +45,6 @@ export default function Products() {
   return (
     <>
       <div className="products-div">
-
         {productsArr.map(product => (
           <Link key={product?.id} to={`/products/${product?.id}`} className="product-tile">
             <div className="product-name-container">
