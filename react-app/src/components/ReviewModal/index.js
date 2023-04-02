@@ -33,6 +33,9 @@ export default function ReviewModal({ productId }) {
     if (comment && comment.length < 10) {
       validationErrors.push('Review needs 10 or more characters');
     }
+    if (comment && comment.length > 250) {
+      validationErrors.push('Review needs to be less than 250 characters');
+    }
     return validationErrors;
   };
 

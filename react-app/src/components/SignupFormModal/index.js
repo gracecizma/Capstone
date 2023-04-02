@@ -45,7 +45,7 @@ function SignupFormModal() {
 			<form onSubmit={handleSubmit}>
 				<ul>
 					{errors?.map((error, idx) => (
-						<li key={idx}>{error}</li>
+						<li key={idx} className="error-message">{error}</li>
 					))}
 				</ul>
 				<div className="signup-email-container">
