@@ -47,12 +47,6 @@ export default function Profile() {
 
   return (
     <>
-      {/* <div>Create a new product</div>
-      <div>
-        <Link to="/products/new">
-          <button>Create</button>
-        </Link>
-      </div> */}
       <div className="profile-menu-container">
         <div className="user-profile-menu">
           <ul>
