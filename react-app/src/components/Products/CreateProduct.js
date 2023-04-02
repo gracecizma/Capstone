@@ -77,13 +77,14 @@ export default function CreateProduct() {
   return (
     <>
       <div className="create-product-container">
-        <div className="create-product-form">
+        <div className="create-product-page">
           <div className="create-header-container">
             <h1>Create a New Product</h1>
             <h2>Tell us about your recipe!</h2>
           </div>
-          <form onSubmit={handleSubmit}>
-
+          <form
+            className="create-product-form"
+            onSubmit={handleSubmit}>
             <div className="create-name-container">
               <label>
                 Name {errors.name &&
@@ -114,19 +115,17 @@ export default function CreateProduct() {
             </div>
 
             <div className="create-price-container">
-              <label> Set a base price for your recipe {errors.price &&
+              <label className="create-price-label"> Set a base price for your recipe {errors.price &&
                 <span className="error-message">{errors.price}</span>}
+                <span className="dollar-sign">$</span>
                 <input
-                  className="create-description-input"
+                  className="create-price-input"
                   value={price}
                   onChange={(e) => setPrice(Number(e.target.value))}
                   type="text"
                   placeholder="Price"
                 />
               </label>
-            </div>
-
-            <div className="create-quantity-container">
               <label> How many are available to be ordered at once? {errors.quantity &&
                 <span className="error-message">{errors.quantity}</span>}
                 <input
@@ -138,6 +137,7 @@ export default function CreateProduct() {
                 />
               </label>
             </div>
+
 
             <div className="create-photo-container">
               <label>Add a picture of your masterpiece! {errors.imageUrl &&

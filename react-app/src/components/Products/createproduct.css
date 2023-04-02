@@ -1,6 +1,6 @@
 .create-product-container {
   display: flex;
-
+  height: 100%;
   width: 80%;
   padding: 10px;
 }
@@ -10,11 +10,19 @@
   flex-direction: column;
 }
 
-.create-product-form {
+.create-product-page {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+}
+
+.create-product-form {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+
 }
 
 
@@ -42,10 +50,31 @@
 
 .create-price-container {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.create-quantity-input {
+  width: 20%;
+}
+
+.create-price-input {
+  width: 20%
+}
+
+.create-photo-container {
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
 }
+
+.create-photo-input {
+  width: 100%;
+}
+
+
 
 .submit-button {
   border-radius: 5px;
