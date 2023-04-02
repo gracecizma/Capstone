@@ -41,7 +41,7 @@ export default function CreateProduct() {
     if (description && description.length < 20) validationErrors.description = "Description must be at least 20 characters";
     if (!price) validationErrors.price = "Price is required";
     if (!quantity) validationErrors.quantity = "Stock available is required";
-    if (!imageUrl) validationErrors.imageUrl = "Preview image is required";
+    if (!imageUrl) validationErrors.imageUrl = "Preview image link is required";
     if (imageUrl && !/\.(jpe?g|png)$/i.test(imageUrl)) {
       validationErrors.imageUrl = 'Image URL must end in .png, .jpg, or .jpeg';
     }
