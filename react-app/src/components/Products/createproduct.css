@@ -1,0 +1,92 @@
+.create-product-container {
+  display: flex;
+  height: 100%;
+  width: 80%;
+  padding: 10px;
+}
+
+.create-header-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-product-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.create-product-form {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+
+}
+
+
+.create-name-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.create-name-input {
+  width: 100%;
+}
+
+.create-description-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.description-input {
+  width: 100%;
+}
+
+.create-price-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.create-quantity-input {
+  width: 20%;
+}
+
+.create-price-input {
+  width: 20%
+}
+
+.create-photo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.create-photo-input {
+  width: 100%;
+}
+
+
+
+.submit-button {
+  border-radius: 5px;
+  height: 30px;
+  width: 80%;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+}
+
+.submit-button-container {
+  display: flex;
+  justify-content: center;
+}

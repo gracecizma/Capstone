@@ -47,11 +47,24 @@ export default function Profile() {
 
   return (
     <>
-      <div>Create a new product</div>
-      <div>
-        <Link to="/products/new">
-          <button>Create</button>
-        </Link>
+      <div className="profile-menu-container">
+        <div className="user-profile-menu">
+          <ul>
+            <li>
+              <Link to={`/products/new`}>Create a New Product</Link>
+            </li>
+            <li>
+              <Link to={`/users/${currUser.id}/profile/reviews`}>
+                Manage Reviews
+              </Link>
+            </li>
+            <li>
+              <Link to={`/users/${currUser.id}/profile/orders`}>
+                Order History
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
       <div className="user-products-div">
         {productsArr.map(product => (

@@ -38,6 +38,7 @@ export default function ShoppingCart() {
       quantity: e.target.value,
     };
     await dispatch(updateItemInCart(itemData));
+
   };
 
   const deleteHandler = async (e, item) => {
@@ -119,6 +120,7 @@ export default function ShoppingCart() {
         {cartArr?.map((item) => (
           <div key={item.id} className="single-cart-item-container">
             <div className="cart-preview-img-container">
+              <h3>{item.product.name}</h3>
               <img
                 className="cart-preview-img"
                 src={item.product.image_url}
@@ -126,48 +128,48 @@ export default function ShoppingCart() {
               />
             </div>
 
-            <div className="cart-item-info">
-              <h3>{item.product.name}</h3>
 
 
 
-              <div className="cart-item-price">
-                ${parseFloat(item.product.price).toFixed(2)}
-              </div>
 
-              <div className="cart-item-quantity">
-                <p className="total-text">Quantity</p>
-                <select onChange={(e) => updateHandler(e, item)}>
-                  {maxAvailable(item.product.quantity).map((number) =>
-                    item.quantity === number ? (
-                      <option value={number}>{number} </option>
-                    ) : (
-                      <option value={number}>{number}</option>
-                    )
-                  )}
-                </select>
-              </div>
+            <div className="cart-item-price">
+              ${parseFloat(item.product.price).toFixed(2)}
+            </div>
 
-              <div className="cart-item-total-price">
-                <div>
-                  ${parseFloat(item.product.price * item.quantity).toFixed(2)}
-                </div>
-                {item.product.quantity === 1 ? (
-                  <div> Last item available! Order soon!</div>
-                ) : (
-                  ""
+            <div className="cart-item-quantity">
+              <p className="total-text">Quantity</p>
+              <select onChange={(e) => updateHandler(e, item)}>
+                {maxAvailable(item.product.quantity).map((number) =>
+                  item.quantity === number ? (
+                    <option value={number}>{number} </option>
+                  ) : (
+                    <option value={number}>{number}</option>
+                  )
                 )}
-              </div>
-
+              </select>
               <button
                 className="remove-from-cart-button"
                 onClick={(e) => deleteHandler(e, item)}
               >
                 Remove
               </button>
-
             </div>
+
+            <div className="cart-item-total-price">
+              <div>
+                ${parseFloat(item.product.price * item.quantity).toFixed(2)}
+              </div>
+              {item.product.quantity === 1 ? (
+                <div> Last item available! Order soon!</div>
+              ) : (
+                ""
+              )}
+            </div>
+
+
+
           </div>
+
         ))}
       </div>
     </div>

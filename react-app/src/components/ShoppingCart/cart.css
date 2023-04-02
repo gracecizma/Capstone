@@ -10,9 +10,15 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border: 1px black solid
 }
 
-.single-cart-item-container {}
+.single-cart-item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .cart-preview-img-container {}
 

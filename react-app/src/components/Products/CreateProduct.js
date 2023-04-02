@@ -41,7 +41,7 @@ export default function CreateProduct() {
     if (description && description.length < 20) validationErrors.description = "Description must be at least 20 characters";
     if (!price) validationErrors.price = "Price is required";
     if (!quantity) validationErrors.quantity = "Stock available is required";
-    if (!imageUrl) validationErrors.imageUrl = "Preview image is required";
+    if (!imageUrl) validationErrors.imageUrl = "Preview image link is required";
     if (imageUrl && !/\.(jpe?g|png)$/i.test(imageUrl)) {
       validationErrors.imageUrl = 'Image URL must end in .png, .jpg, or .jpeg';
     }
@@ -77,21 +77,25 @@ export default function CreateProduct() {
   return (
     <>
       <div className="create-product-container">
-        <div className="create-product-form">
+        <div className="create-product-page">
           <div className="create-header-container">
             <h1>Create a New Product</h1>
             <h2>Tell us about your recipe!</h2>
           </div>
-          <form onSubmit={handleSubmit}>
-
+          <form
+            className="create-product-form"
+            onSubmit={handleSubmit}>
             <div className="create-name-container">
-              <label> Name {errors.name &&
-                <span className="error-message">{errors.name}</span>}
+              <label>
+                Name {errors.name &&
+                  <span className="error-message">{errors.name}</span>}
                 <input
+                  className="create-name-input"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   placeholder="Name"
+
                 />
               </label>
             </div>
@@ -99,32 +103,33 @@ export default function CreateProduct() {
             <div className="create-description-container">
               <label> Describe your recipe! Get creative and tell us what you love about it. {errors.description &&
                 <span className="error-message">{errors.description}</span>}
-                <input
+                <textarea
+                  className="description-input"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  type="text"
+                  rows={4}
+                  cols={10}
                   placeholder="If your recipe will be ordered as multiples, for example a dozen cookies, please say so here."
-                  className="description-input"
                 />
               </label>
             </div>
 
             <div className="create-price-container">
-              <label> Set a base price for your recipe {errors.price &&
+              <label className="create-price-label"> Set a base price for your recipe {errors.price &&
                 <span className="error-message">{errors.price}</span>}
+                <span className="dollar-sign">$</span>
                 <input
+                  className="create-price-input"
                   value={price}
                   onChange={(e) => setPrice(Number(e.target.value))}
                   type="text"
                   placeholder="Price"
                 />
               </label>
-            </div>
-
-            <div className="create-quantity-container">
               <label> How many are available to be ordered at once? {errors.quantity &&
                 <span className="error-message">{errors.quantity}</span>}
                 <input
+                  className="create-quantity-input"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
                   type="text"
@@ -133,10 +138,12 @@ export default function CreateProduct() {
               </label>
             </div>
 
+
             <div className="create-photo-container">
               <label>Add a picture of your masterpiece! {errors.imageUrl &&
                 <span className="error-message">{errors.imageUrl}</span>}
                 <input
+                  className="create-photo-input"
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
                   type="text"
@@ -148,8 +155,11 @@ export default function CreateProduct() {
             <div className="create-category-container">
               <label>What kind of treat is it? {errors.category &&
                 <span className="error-message">{errors.category}</span>}
-                <select value={category?.id} onChange={(e) => setCategory(e.target.value)}>
-                  <option>Select Category</option>
+                <select
+                  className="category-input"
+                  value={category?.id}
+                  onChange={(e) => setCategory(e.target.value)}>
+                  <option >Select Category</option>
                   {categories?.map(category => (
                     <option
                       key={category?.id}
@@ -162,7 +172,7 @@ export default function CreateProduct() {
               </label>
             </div>
 
-            <div>
+            <div className="submit-button-container">
               <button
                 type="submit"
                 className="submit-button"
