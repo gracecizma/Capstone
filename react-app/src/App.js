@@ -9,6 +9,7 @@ import Products from "./components/Products/AllProducts"
 import SingleProduct from "./components/Products/SingleProduct";
 import SplashPage from "./components/SplashPage/SplashPage"
 import Profile from "./components/UserProfile"
+import UserReviews from "./components/UserProfile/UserReviews";
 import CreateProduct from "./components/Products/CreateProduct";
 import UpdateProduct from "./components/Products/UpdateProduct";
 import ShoppingCart from "./components/ShoppingCart";
@@ -37,10 +38,10 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/users/profile/:id/reviews">
-            <h1>Coming soon!</h1>
+            <UserReviews />
           </Route>
           <Route path="/users/profile/:id/orders">
-            <h1>Coming soon!</h1>
+            <h1>Order history coming soon!</h1>
           </Route>
           <Route path="/users/profile/:id">
             <Profile />
@@ -73,7 +74,7 @@ function App() {
             <ShoppingCart />
           </Route>
           <Route path="/search">
-            <h1>Coming soon!</h1>
+            <h1>Search feature coming soon!</h1>
           </Route>
           <Route path="/faqs">
             <h1>FAQ page coming soon</h1>
