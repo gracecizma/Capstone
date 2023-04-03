@@ -36,6 +36,12 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path="/users/profile/:id/reviews">
+            <h1>Coming soon!</h1>
+          </Route>
+          <Route path="/users/profile/:id/orders">
+            <h1>Coming soon!</h1>
+          </Route>
           <Route path="/users/profile/:id">
             <Profile />
           </Route>
@@ -65,6 +71,9 @@ function App() {
           </Route>
           <Route path="/shopping-cart">
             <ShoppingCart />
+          </Route>
+          <Route path="/search">
+            <h1>Coming soon!</h1>
           </Route>
           <Route path="/faqs">
             <h1>FAQ page coming soon</h1>
