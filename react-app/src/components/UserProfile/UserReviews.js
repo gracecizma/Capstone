@@ -33,8 +33,8 @@ export default function UserReviews() {
                 Created At: {review?.created_at.substring(0, 16)}
               </div>
               <div className="user-rating-container">
-                <div>{review?.product?.name}</div>
-                <div>{' ★ ' + review?.stars}</div>
+                <div className="review-product-name">{review?.product?.name}</div>
+                <div className="user-review-rating">{' ★ ' + review?.stars}</div>
               </div>
               <div>{review?.comment}</div>
               <div className="update-delete-reviews">
