@@ -80,6 +80,9 @@ export default function SingleProduct() {
     if (!currUser) {
       return true;
     }
+    if (!quantity) {
+      return true;
+    }
   };
 
   console.log("can review?", canReview)
@@ -119,6 +122,7 @@ export default function SingleProduct() {
                 <button
                   className="cart-button"
                   onClick={addCartClick}
+                  disabled={quantity === 0}
                 >
                   <OpenModalMenuItem
                     itemText="Add to cart"
