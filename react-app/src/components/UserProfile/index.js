@@ -54,12 +54,12 @@ export default function Profile() {
               <Link to={`/products/new`}>Create a New Product</Link>
             </li>
             <li>
-              <Link to={`/users/${currUser.id}/profile/reviews`}>
+              <Link to={`/users/profile/${currUser.id}/reviews`}>
                 Manage Reviews
               </Link>
             </li>
             <li>
-              <Link to={`/users/${currUser.id}/profile/orders`}>
+              <Link to={`/users/profile/${currUser.id}/orders`}>
                 Order History
               </Link>
             </li>

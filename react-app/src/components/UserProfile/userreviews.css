@@ -1,0 +1,13 @@
+.reviews-div {
+  margin: 40px;
+  height: 100%;
+  width: 100%;
+}
+
+.single-user-review {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}

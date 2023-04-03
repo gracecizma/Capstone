@@ -102,7 +102,7 @@ export default function ShoppingCart() {
   return (
     // <h1>Welcome to your shopping cart</h1>
     <div className="full-cart-container">
-      <div className="cart-quantity-header">
+      <div className="cart-total-quantity-header">
         {totalQuantity === 1 ? (
           <h2>{totalQuantity} item in your cart</h2>
         ) : (
@@ -112,10 +112,10 @@ export default function ShoppingCart() {
 
       <div className="cart-items-container">
         <div className="cart-items-header">
-          <p>Product</p>
-          <p>Price</p>
-          <p>Qty</p>
-          <p>Total</p>
+          <p className="cart-product-header">Product</p>
+          <p className="cart-price-header">Price</p>
+          <p className="cart-quantity-header">Qty</p>
+          <p className="cart-total-header">Total</p>
         </div>
         {cartArr?.map((item) => (
           <div key={item.id} className="single-cart-item-container">
