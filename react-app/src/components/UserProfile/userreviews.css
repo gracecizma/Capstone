@@ -11,3 +11,17 @@
   flex-direction: column;
   margin-top: 20px;
 }
+
+.user-rating-container {
+  display: flex;
+  align-items: center;
+}
+
+.review-product-name {
+  font-weight: bold;
+}
+
+.user-review-rating {
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
