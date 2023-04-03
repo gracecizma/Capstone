@@ -1,0 +1,74 @@
+.filter-results-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.filter-round {
+  height: 40px;
+  width: 200px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: bold;
+  border: 2px solid black;
+}
+
+.filter-by {
+  font-weight: 100;
+}
+
+.num-results {
+  margin-right: 10px;
+  margin-top: 12px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.no-results {
+  height: 300px;
+  background-color: antiquewhite;
+}
+
+.no-results-text {
+  font-size: 40px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding: 20px;
+}
+
+.try-again {
+  font-size: 20px;
+  padding: 30px;
+}
+
+.products-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.product-image-container {
+  width: 250px;
+  height: 250px;
+}
+
+.single-product-image {
+  width: 100%;
+  height: 100%;
+}
+
+.product-card {
+  height: 300px;
+  width: 300px;
+  margin: 50px;
+}
+
+.product-name {
+  font-weight: bold;
+}
+
+.reviews-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
