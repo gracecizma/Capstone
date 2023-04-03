@@ -22,6 +22,7 @@ export default function UserReviews() {
   return (
     <>
       <div className="reviews-div">
+        <h2 className="manage-reviews-header">Manage Your Reviews</h2>
         <div className="reviews-container">
           {reviewsArr.map(review => (
             <Link
