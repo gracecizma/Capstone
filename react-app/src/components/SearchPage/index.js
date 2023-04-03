@@ -50,9 +50,6 @@ export default function SearchPage() {
   useEffect(() => {
     if (filteredProducts.length) {
       console.log(filter);
-      if (filter === "Most Recent") {
-        filteredProducts = filteredProducts.sort((a, b) => filterHelper);
-      }
 
       if (filter === "Lowest Price") {
         filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
@@ -62,9 +59,6 @@ export default function SearchPage() {
         filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
       }
 
-      if (filter === "Top Reviewed") {
-        filteredProducts.sort((a, b) => a.price < b.price);
-      }
 
       console.log("use hit");
       console.log("filtered", filteredProducts);
@@ -107,8 +101,7 @@ export default function SearchPage() {
                 <option value="Relevancy">Filter by: Relevancy</option>
                 <option value="Lowest Price">Filter by: Lowest Price</option>
                 <option value="Highest Price">Filter by: Highest Price</option>
-                <option value="Top Reviewed">Filter by: Top Reviewed</option>
-                <option value="Most Recent">Filter by: Most Recent</option>
+
               </select>
             </form>
           </div>
@@ -131,24 +124,20 @@ export default function SearchPage() {
                 key={product.id}
                 onClick={() => history.push(`/products/${product.id}`)}
               >
-
-                <div>
-
-
-                  <div className="product-info">
-                    <div className="product-name">{product.name}</div>
-                    <div className="product-image-container">
-                      <img
-                        className="single-product-image"
-                        src={product.image_url}
-                      />
-                    </div>
-                    <div className="reviews-price">
-                      <div className="product-reviews">{' ★ ' + product.avg_rating}</div>
-                      <p className="price">${product.price}</p>
-                    </div>
+                <div className="product-info">
+                  <div className="product-name">{product.name}</div>
+                  <div className="product-image-container">
+                    <img
+                      className="single-product-image"
+                      src={product.image_url}
+                    />
+                  </div>
+                  <div className="reviews-price">
+                    <div className="product-reviews">{' ★ ' + product.avg_rating}</div>
+                    <p className="price">${product.price}</p>
                   </div>
                 </div>
+
 
               </div>
             ))
@@ -168,11 +157,12 @@ export default function SearchPage() {
                         className="single-product-image"
                         src={product.image_url} />
                     </div>
-                    <div className="product-reviews">{' ★ ' + product.avg_rating}</div>
-                    <p className="price">${product.price}</p>
+                    <div className="reviews-price">
+                      <div className="product-reviews">{' ★ ' + product.avg_rating}</div>
+                      <p className="price">${product.price}</p>
+                    </div>
                   </div>
                 </div>
-                {/* </Link> */}
               </div>
             ))}
         </div>
