@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import DeleteReviewModal from "../ReviewModal/DeleteReview";
 import OpenModalMenuItem from "../OpenModalButton/MenuItem";
 import UpdateReview from "../ReviewModal/UpdateReview";
+import "./userreviews.css"
 
 
 export default function UserReviews() {
@@ -23,7 +24,14 @@ export default function UserReviews() {
       <div className="reviews-div">
         <div className="reviews-container">
           {reviewsArr.map(review => (
-            <Link key={review.id} className="single-user-review">
+            <Link
+              key={review.id}
+              to={`/products/${review.product_id}`}
+              className="single-user-review"
+            >
+              <div>
+                Created At: {review?.created_at}
+              </div>
               <div className="user-rating-container">
                 <div>{review?.product?.name}</div>
                 <div>{' ★ ' + review?.stars}</div>
