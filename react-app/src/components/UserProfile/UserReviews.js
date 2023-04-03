@@ -30,7 +30,7 @@ export default function UserReviews() {
               className="single-user-review"
             >
               <div>
-                Created At: {review?.created_at}
+                Created At: {review?.created_at.substring(0, 16)}
               </div>
               <div className="user-rating-container">
                 <div>{review?.product?.name}</div>
