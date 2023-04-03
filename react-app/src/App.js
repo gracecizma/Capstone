@@ -13,6 +13,7 @@ import UserReviews from "./components/UserProfile/UserReviews";
 import CreateProduct from "./components/Products/CreateProduct";
 import UpdateProduct from "./components/Products/UpdateProduct";
 import ShoppingCart from "./components/ShoppingCart";
+import SearchPage from "./components/SearchPage";
 import Breads from "./components/Products/Categories/Breads";
 import Cookies from "./components/Products/Categories/Cookies";
 import Cake from "./components/Products/Categories/Cakes";
@@ -73,8 +74,8 @@ function App() {
           <Route path="/shopping-cart">
             <ShoppingCart />
           </Route>
-          <Route path="/search">
-            <h1>Search feature coming soon!</h1>
+          <Route path="/search/:searchParams">
+            <SearchPage />
           </Route>
           <Route path="/faqs">
             <h1>FAQ page coming soon</h1>
