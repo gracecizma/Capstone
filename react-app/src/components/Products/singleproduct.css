@@ -59,6 +59,10 @@
 
 
 /* Styles for product reviews */
+.post-review-button {
+  list-style-type: none;
+}
+
 .reviews-container {
   max-width: 950px;
   min-width: 350px;

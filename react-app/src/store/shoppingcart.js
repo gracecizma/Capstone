@@ -43,23 +43,41 @@ export const getUserCart = () => async (dispatch) => {
 }
 
 // Add item to cart
-export const addItemToCart = (item) => async (dispatch) => {
-  const res = await fetch("/api/shopping-cart/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(item)
-  })
-  console.log("item", item)
-  console.log("res", res)
-  if (res.ok) {
-    const data = await res.json()
-    console.log("add item to cart data", data)
-    dispatch(addCartItem(data))
-    return { status: 'success' }
-  } else {
-    return { state: 'error' }
+// export const addItemToCart = (item) => async (dispatch) => {
+//   const res = await fetch("/api/shopping-cart/", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(item)
+//   })
+//   if (res.ok) {
+//     const data = await res.json()
+//     dispatch(addCartItem(data))
+//     return { status: 'success' }
+//   } else {
+//     return { state: 'error' }
+//   }
+// }
+
+export const addItemToCart = (item) => (dispatch, getState) => {
+  const cart = getState().carts.cart;
+  const cartItem = cart[item.product_id];
+
+  if (cartItem) {
+    const updatedItem = {
+      ...cartItem,
+      quantity: cartItem.quantity + item.quantity,
+    };
+
+    dispatch(updateCartItem(updatedItem));
   }
-}
+
+  dispatch({
+    type: ADD_CART_ITEM,
+    payload: item,
+  });
+};
+
+
 
 // update cart item
 export const updateItemInCart = (item) => async (dispatch) => {
@@ -71,7 +89,6 @@ export const updateItemInCart = (item) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json()
-    console.log("update dart item data", data)
     dispatch(updateCartItem(data))
     dispatch(getUserCart())
   }
@@ -106,7 +123,18 @@ export default function cartReducer(state = initialState, action) {
       return newState
     }
     case ADD_CART_ITEM: {
-      return newState
+      const newItem = action.payload;
+      console.log("new item for cart", newItem)
+      const existingItem = newState.cart[newItem.product_id];
+      console.log("existing item to update in cart", existingItem)
+      if (existingItem) {
+        existingItem.quantity += newItem.quantity;
+        console.log("cart state", newState)
+      } else {
+        newState.cart[newItem.product_id] = newItem;
+        console.log("cart state", newState)
+      }
+      return newState;
     }
     case EDIT_CART_ITEM: {
       newState.cart[action.payload.id].quantity = action.payload.quantity
