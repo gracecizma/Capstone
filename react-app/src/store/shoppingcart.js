@@ -49,11 +49,8 @@ export const addItemToCart = (item) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(item)
   })
-  console.log("item", item)
-  console.log("res", res)
   if (res.ok) {
     const data = await res.json()
-    console.log("add item to cart data", data)
     dispatch(addCartItem(data))
     return { status: 'success' }
   } else {
@@ -71,7 +68,6 @@ export const updateItemInCart = (item) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json()
-    console.log("update dart item data", data)
     dispatch(updateCartItem(data))
     dispatch(getUserCart())
   }

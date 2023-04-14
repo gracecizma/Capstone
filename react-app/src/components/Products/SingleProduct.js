@@ -70,12 +70,14 @@ export default function SingleProduct() {
       const response = await dispatch(addItemToCart(data))
       if (response && response.status === 'success') {
         setTimeout(() => setDisableButton(false), 1000);
-        <OpenModalMenuItem
-          itemText="Add to cart"
-          itemTextClassName="cart-button-text"
-          modalDisabled={disableButton}
-          modalComponent={<AddToCart product={product} quantity={quantity} />}
-        />
+        return (
+          <OpenModalMenuItem
+            itemText="Add to cart"
+            itemTextClassName="cart-button-text"
+            modalDisabled={disableButton}
+            modalComponent={<AddToCart product={product} quantity={quantity} />}
+          />
+        )
       }
     }
   }
@@ -122,13 +124,8 @@ export default function SingleProduct() {
                   className="cart-button"
                   onClick={addCartClick}
                   disabled={quantity === "Select Quantity" || quantity === 0}
-                > Add to cart
-                  {/* <OpenModalMenuItem
-                    itemText="Add to cart"
-                    itemTextClassName="cart-button-text"
-                    modalDisabled={disableButton}
-                    modalComponent={<AddToCart product={product} quantity={quantity} />}
-                  /> */}
+                >
+                  Add to cart
                 </button>
               </div>
             </div>

@@ -118,29 +118,25 @@ export default function ShoppingCart() {
           <p className="cart-total-header">Total</p>
         </div>
         {cartArr?.map((item) => (
-          <div key={item.id} className="single-cart-item-container">
+          <div key={item?.id} className="single-cart-item-container">
             <div className="cart-preview-img-container">
-              <h3>{item.product.name}</h3>
+              <h3>{item?.product?.name}</h3>
               <img
                 className="cart-preview-img"
-                src={item.product.image_url}
+                src={item?.product?.image_url}
                 style={{ width: "200px", height: "200px" }}
               />
             </div>
 
-
-
-
-
             <div className="cart-item-price">
-              ${parseFloat(item.product.price).toFixed(2)}
+              ${parseFloat(item?.product?.price).toFixed(2)}
             </div>
 
             <div className="cart-item-quantity">
               <p className="total-text">Quantity</p>
               <select onChange={(e) => updateHandler(e, item)}>
-                {maxAvailable(item.product.quantity).map((number) =>
-                  item.quantity === number ? (
+                {maxAvailable(item?.product?.quantity).map((number) =>
+                  item?.quantity === number ? (
                     <option value={number}>{number} </option>
                   ) : (
                     <option value={number}>{number}</option>
@@ -157,19 +153,15 @@ export default function ShoppingCart() {
 
             <div className="cart-item-total-price">
               <div>
-                ${parseFloat(item.product.price * item.quantity).toFixed(2)}
+                ${parseFloat(item?.product?.price * item?.quantity).toFixed(2)}
               </div>
-              {item.product.quantity === 1 ? (
+              {item?.product?.quantity === 1 ? (
                 <div> Last item available! Order soon!</div>
               ) : (
                 ""
               )}
             </div>
-
-
-
           </div>
-
         ))}
       </div>
     </div>
