@@ -55,6 +55,9 @@ export const addItemToCart = (item) => async (dispatch) => {
     const data = await res.json()
     console.log("add item to cart data", data)
     dispatch(addCartItem(data))
+    return { status: 'success' }
+  } else {
+    return { state: 'error' }
   }
 }
 

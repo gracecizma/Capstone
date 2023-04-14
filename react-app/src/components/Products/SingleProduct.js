@@ -16,21 +16,18 @@ export default function SingleProduct() {
   const dispatch = useDispatch()
   const { id } = useParams()
   const product = useSelector((state) => state?.products?.singleProduct)
-  // console.log("product obj", product)
+
   const currUser = useSelector((state) => state?.session?.user)
   const userReviews = useSelector((state) => state?.reviews?.userReviews)
-  // console.log("user reviews", userReviews)
   const userReviewsArr = Object.values(userReviews)
-  // console.log("user reviews array", userReviewsArr)
   const productReviews = useSelector((state) => state?.reviews?.productReviews)
-  // console.log("product reviews", productReviews)
   const productReviewsArr = Object.values(productReviews)
 
   const [quantity, setQuantity] = useState(0)
   const [hasReviewed, setHasReviewed] = useState(() => {
-    // Retrieve the value from localStorage, default to false if it doesn't exist
     return localStorage.getItem(`hasReviewed_${currUser?.id}_${product.id}`) === "true" || false
   })
+  const [disableButton, setDisableButton] = useState(false)
 
   useEffect(() => {
     dispatch(getSingleProduct(id))
@@ -47,12 +44,9 @@ export default function SingleProduct() {
 
   const canReview = (currUser && (product.seller_id !== currUser.id) && !hasReviewed)
 
-  // console.log("product id", id)
-
   const deleteReview = (reviewId) => {
     dispatch(deleteReview(reviewId))
   }
-
 
   const maxAvailable = [];
   for (let i = 1; i <= product.quantity; i++) {
@@ -66,26 +60,31 @@ export default function SingleProduct() {
   const addCartClick = async (e) => {
     e.preventDefault();
 
-
-    const data = {
-      user_id: currUser.id,
-      product_id: product.id,
-      quantity: quantity
+    if (!disableButton && quantity >= 1) {
+      setDisableButton(true);
+      const data = {
+        user_id: currUser.id,
+        product_id: product.id,
+        quantity: quantity
+      }
+      const response = await dispatch(addItemToCart(data))
+      if (response && response.status === 'success') {
+        setTimeout(() => setDisableButton(false), 1000);
+        <OpenModalMenuItem
+          itemText="Add to cart"
+          itemTextClassName="cart-button-text"
+          modalDisabled={disableButton}
+          modalComponent={<AddToCart product={product} quantity={quantity} />}
+        />
+      }
     }
-    console.log("item to be added", data)
-    await dispatch(addItemToCart(data))
   }
 
-  const disableButton = () => {
-    if (!currUser) {
-      return true;
-    }
-    if (!quantity) {
-      return true;
-    }
-  };
+  if (!currUser) {
+    setDisableButton(true)
+  }
 
-  console.log("can review?", canReview)
+
   return (
     <>
       <div className="single-product-div">
@@ -122,14 +121,14 @@ export default function SingleProduct() {
                 <button
                   className="cart-button"
                   onClick={addCartClick}
-                  disabled={quantity === 0}
-                >
-                  <OpenModalMenuItem
+                  disabled={quantity === "Select Quantity" || quantity === 0}
+                > Add to cart
+                  {/* <OpenModalMenuItem
                     itemText="Add to cart"
                     itemTextClassName="cart-button-text"
                     modalDisabled={disableButton}
                     modalComponent={<AddToCart product={product} quantity={quantity} />}
-                  />
+                  /> */}
                 </button>
               </div>
             </div>
