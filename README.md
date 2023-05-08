@@ -17,7 +17,7 @@ Gracefully baked is an e-commerce site that lists all my favorite baked goods fo
 
 ### Installation & Development
 
-To install and run the Handmade Haven app, follow these steps:
+To install and run the app, follow these steps:
 
 1. Clone the repository from GitHub:
 
