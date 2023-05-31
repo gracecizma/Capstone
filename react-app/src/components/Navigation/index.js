@@ -6,7 +6,8 @@ import {
 	NavDropdown,
 	FormControl,
 	Form,
-	Button
+	Button,
+	Image
 } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -63,6 +64,7 @@ function Navigation({ isLoaded }) {
 			<Container>
 
 				<Navbar.Toggle aria-controls="navbar-nav" />
+				<Image src="https://i.imgur.com/YCUcE1L.png" alt="logo" fluid />
 				<Navbar.Collapse id="navbar-nav">
 					<Nav className="mr-auto nav-links">
 						<Nav.Link as={NavLink} exact to="/" className="home-link">
@@ -95,7 +97,7 @@ function Navigation({ isLoaded }) {
 							Profile
 						</Nav.Link>
 					</Nav>
-					<img src="https://i.imgur.com/YCUcE1L.png" alt="logo" />
+
 					<Navbar.Brand className="mx-auto logo">
 						<NavLink exact to="/" className="logo-text-one" style={navLinkStyles}>
 							Gracefully
