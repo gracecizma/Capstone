@@ -12,14 +12,15 @@ export default function SplashPage() {
       <h2>My name is Grace. By day I'm a software developer, by other day I'm a baker.</h2>
       <h3>Feel free to head over to <Link to="/products">Products
       </Link> for all my baked goods. Otherwise, stay here and read my story!</h3>
-      <div>
-        <img
-          src="https://i.imgur.com/GFOV2xr.jpg" alt="Headshot" style={{ "height": 250, "width": 350 }}
-        />
-      </div>
+
       <div>
         <div>
           <h3>About Me</h3>
+          <div>
+            <img
+              src="https://i.imgur.com/GFOV2xr.jpg" alt="Headshot" style={{ "height": 250, "width": 350 }}
+            />
+          </div>
           <div>
             I grew up around technology thanks to my mom who worked as a database administrator. She built computers for fun and taught me how to troubleshoot my computer issues as well. As a result, computers were second nature to me. I loved tinkering with technology and figuring out how things worked. However, when it came time to choose a college major, I decided to pursue my passion for history. I loved getting my degree and still love history as a hobby, but I knew deep down that I wanted a career that would challenge and excite me.
           </div>
