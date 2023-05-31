@@ -22,7 +22,7 @@ To install and run the app, follow these steps:
 1. Clone the repository from GitHub:
 
 ```bash
-git clone https://github.com/your-username/handmade-haven.git
+git clone https://github.com/your-username/gracefully-baked.git
 ```
 
 2. Install the required Python packages:
