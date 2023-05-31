@@ -91,6 +91,7 @@ function Navigation({ isLoaded }) {
 						<NavLink to={`/users/profile/${sessionUser?.id}`} className="profile-link">Profile</NavLink>
 					</div>
 				</div>
+				<img src="https://i.imgur.com/YCUcE1L.png" alt="Logo" />
 				<div className="header">
 					<NavLink exact to="/" className="logo-text-one">Gracefully</NavLink>
 					<NavLink exact to="/" className="logo-text-two">Baked</NavLink>
