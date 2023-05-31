@@ -1,11 +1,10 @@
-from app.models import db, Product, User, SCHEMA, environment
+from app.models import db, Product, SCHEMA, environment
 from sqlalchemy.sql import text
 from random import randint
 from datetime import datetime
 
 
 def seed_products():
-    users = User.query.all()
     bagel = Product(
         name="Bagels", description="Fluffy and yet chewy, with a super crunchy crust. Great for sandwiches or alone.", price=8.00,
         quantity=randint(1, 20), created_at=datetime.utcnow(), updated_at=datetime.utcnow(), seller_id=1, image_url="https://i.imgur.com/RKMkkny.jpg", category_id=1
