@@ -28,6 +28,8 @@ export default function SingleProduct() {
     return localStorage.getItem(`hasReviewed_${currUser?.id}_${product.id}`) === "true" || false
   })
   const [disableButton, setDisableButton] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
 
   useEffect(() => {
     dispatch(getSingleProduct(id))
@@ -54,7 +56,7 @@ export default function SingleProduct() {
   }
 
   const quantityUpdate = (e) => {
-    setQuantity(e.target.value);
+    setQuantity(parseInt(e.target.value));
   };
 
   const addCartClick = async (e) => {
@@ -70,22 +72,26 @@ export default function SingleProduct() {
       const response = await dispatch(addItemToCart(data))
       if (response && response.status === 'success') {
         setTimeout(() => setDisableButton(false), 1000);
-        return (
-          <OpenModalMenuItem
-            itemText="Add to cart"
-            itemTextClassName="cart-button-text"
-            modalDisabled={disableButton}
-            modalComponent={<AddToCart product={product} quantity={quantity} />}
-          />
-        )
+        setModalVisible(true);
+        setModalContent(<AddToCart product={product} quantity={quantity} />)
       }
+
     }
   }
 
-  if (!currUser) {
-    setDisableButton(true)
+  const handleCloseModal = () => {
+    setModalVisible(false);
+    setModalContent(null);
   }
 
+  useEffect(() => {
+    if (!currUser) {
+      setDisableButton(true)
+    }
+  }, [currUser])
+
+  const cartButtonDisabled =
+    !currUser || quantity === "Select Quantity" || quantity === 0 || disableButton;
 
   return (
     <>
@@ -123,10 +129,18 @@ export default function SingleProduct() {
                 <button
                   className="cart-button"
                   onClick={addCartClick}
-                  disabled={quantity === "Select Quantity" || quantity === 0}
+                  disabled={cartButtonDisabled}
                 >
                   Add to cart
+                  <OpenModalMenuItem
+                    itemTextClassName="cart-button-text"
+                    modalDisabled={!modalContent}
+                    modalComponent={modalContent}
+                    modalVisible={modalVisible}
+                    handleCloseModal={handleCloseModal}
+                  />
                 </button>
+
               </div>
             </div>
           </div>

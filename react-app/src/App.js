@@ -81,7 +81,7 @@ function App() {
             <h1>FAQ page coming soon</h1>
           </Route>
           <Route path="/">
-            <Products />
+            <SplashPage />
           </Route>
         </Switch>
       )}
