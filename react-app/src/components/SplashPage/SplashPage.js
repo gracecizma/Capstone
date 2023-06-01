@@ -34,7 +34,7 @@ export default function SplashPage() {
         <Col md={6} className="tech-specs-section">
           <h3>Tech specs</h3>
           <div>
-            This website was built with Flask, SQLAlchemy, Python, React, and Redux.
+            This website was built with Flask, SQLAlchemy, Python, React, and Redux. It is a work in progress and updates are being made all the time. If you have any problems, please reach out to me with details.
           </div>
           <div>
             During my time at App Academy, I started with the basics of how to write a function and object-oriented programming. As I progressed, I moved on to learning about data structures and algorithms, which helped me to write more efficient and scalable code. I then delved into the basics of CSS and HTML styling, which allowed me to build more user-friendly interfaces.
