@@ -108,6 +108,7 @@ export default function Products() {
                               }}
                               style={{ listStyle: 'none' }}
                             >
+                              Add to Cart
                               <Offcanvas
                                 show={show}
                                 onHide={handleClose}
