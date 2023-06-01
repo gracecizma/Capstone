@@ -22,7 +22,7 @@ To install and run the app, follow these steps:
 1. Clone the repository from GitHub:
 
 ```bash
-git clone https://github.com/your-username/gracefully-baked.git
+git clone https://github.com/your-username/Gracefully-Baked.git
 ```
 
 2. Install the required Python packages:
