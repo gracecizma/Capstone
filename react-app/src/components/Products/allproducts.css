@@ -1,4 +1,10 @@
-.products-div {
+.product-tile.card {
+  width: 300px;
+  height: 500px;
+}
+
+
+/* .products-div {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -10,7 +16,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
   flex-basis: 20%;
   text-decoration: none;
   min-width: 230px;
@@ -20,54 +26,67 @@
   background-color: #f7ede6;
   border-radius: 5px;
   border: solid 1px #332013;
+  box-sizing: border-box;
 }
-
-.product-name-container {
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-  color: black;
-}
-
 
 .product-img-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 70%;
   width: 100%;
-  height: 75%;
 }
 
 .product-img {
   max-width: 100%;
-  height: 250px;
+  max-height: 100%;
+  object-fit: contain;
+} */
+
+/* .product-name-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  font-weight: bold;
+  color: black;
 }
 
 .product-details-container {
   display: flex;
   flex-direction: column;
-  padding: 2px;
-  height: 25%;
+  justify-content: space-between;
+  padding: 10px;
+  height: 40%;
   width: 100%;
   color: black;
+  box-sizing: border-box;
 }
 
 .product-rating-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+
   justify-content: space-around;
   height: 30px;
 }
 
+.product-rating.card-text {
+  margin: 10px;
+}
+
+
 .product-total-reviews {
-  margin-top: 20px;
+  margin: 10px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .price-and-cart-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   height: 35px;
 }
 
@@ -81,4 +100,4 @@
   margin-left: 15px;
   margin-top: 7px;
   height: 35px;
-}
+} */
