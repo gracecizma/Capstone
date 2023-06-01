@@ -51,10 +51,8 @@ export const addItemToCart = (item) => async (dispatch) => {
   })
   if (res.ok) {
     const data = await res.json()
+    console.log("add item to cart data", data)
     dispatch(addCartItem(data))
-    return { status: 'success' }
-  } else {
-    return { state: 'error' }
   }
 }
 
@@ -90,18 +88,32 @@ export const deleteFromCart = (item) => async (dispatch) => {
 
 
 const initialState = {
-  cart: {}
+  cart: []
 };
 
 
 export default function cartReducer(state = initialState, action) {
-  let newState = { ...state, ...state.cart }
+  let newState = { ...state }
   switch (action.type) {
     case GET_CART: {
       newState.cart = action.payload
+      console.log("new state get cart", newState)
       return newState
     }
     case ADD_CART_ITEM: {
+      console.log("new state add to cart action", action.payload)
+      console.log("new state add to cart", newState.cart)
+      if (newState.cart.length) {
+        console.log("hit if statement")
+        newState.cart.forEach((item) => {
+          if (item.product_id === action.payload.product_id) {
+            item.quantity += action.payload.quantity
+          }
+        })
+      } else {
+        console.log("hit else statement")
+        newState.cart.push(action.payload)
+      }
       return newState
     }
     case EDIT_CART_ITEM: {

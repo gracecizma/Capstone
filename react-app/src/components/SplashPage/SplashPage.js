@@ -45,9 +45,30 @@ export default function SplashPage() {
           <div className="projects-sections">
             <h3>My projects & other important links</h3>
             <ul>
-              <li>HeirBnB - my first solo project!</li>
-              <li>Github</li>
-              <li>LinkedIn</li>
+              <li>
+                <a href="https://github.com/gracecizma/HeirBnB" target="_blank">
+                  HeirBnB - my first solo project!
+                </a>
+              </li>
+
+              <li>
+                <a href="https://github.com/gracecizma" target="_blank">
+                  Github
+                </a>
+              </li>
+
+              <li>
+                <a href="https://www.linkedin.com/in/gracescizma/" target="_blank">
+                  LinkedIn
+                </a>
+              </li>
+
+              <li>
+                I'm doing all this on my own. If you like the site and want to support my work, consider buying me a
+                <a href="https://www.buymeacoffee.com/gracefullybaked" target="_blank">
+                  coffee!
+                </a>
+              </li>
             </ul>
           </div>
         </Col>
