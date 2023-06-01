@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   Button,
   ListGroup,
   Row,
   Col,
+  Offcanvas
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
@@ -21,9 +22,25 @@ export default function Products() {
   const currUser = useSelector((state) => state?.session?.user)
   const productsArr = Object.values(products)
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
   useEffect(() => {
     dispatch(getAllProducts())
   }, [dispatch])
+
+  useEffect(() => {
+    let timeoutId;
+    if (show) {
+      timeoutId = setTimeout(() => {
+        setShow(false);
+      }, 5000);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [show]);
 
   if (!productsArr.length) return null
 
@@ -37,7 +54,6 @@ export default function Products() {
     <>
       <div className="products-div">
         <Row xs={1} md={2} lg={3} xl={3}>
-
           {productsArr.map((product) => (
             <Col key={product?.id}>
               <Link to={`/products/${product.id}`}>
@@ -79,7 +95,6 @@ export default function Products() {
 
                           <ListGroup.Item className="details-text">
                             <Button
-                              className="cart-button"
                               onClick={(e) => {
                                 e.preventDefault();
                                 const data = {
@@ -89,15 +104,23 @@ export default function Products() {
                                 };
                                 console.log('item to be added', data);
                                 dispatch(addItemToCart(data));
+                                setShow(true)
                               }}
                               style={{ listStyle: 'none' }}
                             >
-                              <OpenModalMenuItem
-                                itemText="Add to cart"
-                                itemTextClassName="cart-button-text"
-                                modalDisabled={disableButton}
-                                modalComponent={<AddToCart product={product} quantity={1} />}
-                              />
+                              <Offcanvas
+                                show={show}
+                                onHide={handleClose}
+                                placement="end"
+                                backdrop={false}
+                              >
+                                <Offcanvas.Header closeButton onHide={handleClose}>
+                                  <Offcanvas.Title>Item Added to Cart</Offcanvas.Title>
+                                </Offcanvas.Header>
+                                <Offcanvas.Body>
+                                  <AddToCart product={product} quantity={1} />
+                                </Offcanvas.Body>
+                              </Offcanvas>
                             </Button>
                           </ListGroup.Item>
                         </Col>
@@ -111,62 +134,5 @@ export default function Products() {
         </Row>
       </div >
     </>
-
-    // <>
-    //   <div className="products-div">
-    //     {productsArr.map(product => (
-    //       <Link key={product?.id} to={`/products/${product?.id}`} className="product-tile">
-    //         <div className="product-name-container">
-    //           <p className="product-name">
-    //             {product?.name}
-    //           </p>
-    //         </div>
-    //         <div className="product-img-container">
-    //           <img
-    //             className="product-img"
-    //             src={product?.image_url} />
-    //         </div>
-
-    //         <div className="product-details-container">
-    //           <div className="product-rating-container">
-    //             <p className="product-rating">
-    //               Rating:{product?.avg_rating ? ' ★ ' + Number(product?.avg_rating).toFixed(1) : '★ New'}
-    //             </p>
-    //             <p className="product-total-reviews">
-    //               {product?.total_reviews === 0 ? "" : ""}
-    //               {product?.total_reviews === 1 ? product?.total_reviews + ' review' : ""}
-    //               {product?.total_reviews > 1 ? product?.total_reviews + ' reviews' : ""}
-    //             </p>
-    //           </div>
-    //           <div className="price-and-cart-container">
-    //             <p className="product-price">
-    //               ${parseFloat(product?.price).toFixed(2)}
-    //             </p>
-    //             <button
-    //               className="cart-button"
-    //               onClick={(e) => {
-    //                 e.preventDefault();
-    //                 const data = {
-    //                   user_id: currUser.id,
-    //                   product_id: product.id,
-    //                   quantity: 1
-    //                 }
-    //                 console.log("item to be added", data)
-    //                 dispatch(addItemToCart(data))
-    //               }}
-    //             >
-    //               <OpenModalMenuItem
-    //                 itemText="Add to cart"
-    //                 itemTextClassName="cart-button-text"
-    //                 modalDisabled={disableButton}
-    //                 modalComponent={<AddToCart product={product} quantity={1} />}
-    //               />
-    //             </button>
-    //           </div>
-    //         </div>
-    //       </Link>
-    //     ))}
-    //   </div>
-    // </>
   )
 }
