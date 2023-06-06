@@ -96,33 +96,35 @@ export default function cartReducer(state = initialState, action) {
   let newState = { ...state }
   switch (action.type) {
     case GET_CART: {
-      newState.cart = action.payload
+      newState.cart.push(action.payload)
       console.log("new state get cart", newState)
       return newState
     }
     case ADD_CART_ITEM: {
       console.log("new state add to cart action", action.payload)
-      console.log("new state add to cart", newState.cart)
-      if (newState.cart.length) {
-        console.log("hit if statement")
-        newState.cart.forEach((item) => {
-          if (item.product_id === action.payload.product_id) {
-            item.quantity += action.payload.quantity
-          }
-        })
+      console.log("new state add to cart", newState)
+      const existingItemIndex = newState.cart.findIndex(
+        (item) => item.product_id === action.payload.product_id
+      );
+
+      if (existingItemIndex !== -1) {
+        newState.cart[existingItemIndex].quantity += action.payload.quantity;
       } else {
-        console.log("hit else statement")
-        newState.cart.push(action.payload)
+        newState.cart.push(action.payload);
       }
-      return newState
+
+      return newState;
     }
     case EDIT_CART_ITEM: {
       newState.cart[action.payload.id].quantity = action.payload.quantity
       return newState
     }
     case REMOVE_FROM_CART: {
-      delete newState.cart[action.payload]
-      return newState
+      const updatedCart = newState.cart.filter(
+        (item) => item.product_id !== action.payload
+      );
+      newState.cart = updatedCart;
+      return newState;
     }
     default:
       return newState

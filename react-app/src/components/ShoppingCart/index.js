@@ -7,7 +7,7 @@ import "./cart.css";
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
-  const userCart = useSelector((state) => state.carts.cart);
+  const userCart = useSelector((state) => state.cart.cart);
   console.log("cart items", userCart);
   const currUser = useSelector((state) => state?.session?.user);
   console.log("current user", currUser);
@@ -22,13 +22,13 @@ export default function ShoppingCart() {
     dispatch(getUserCart());
   }, [dispatch]);
 
-  if (!currUser) {
-    return (
-      <div className="cart-container">
-        <h1>Please log in to add items to cart</h1>
-      </div>
-    );
-  }
+  // if (!currUser) {
+  //   return (
+  //     <div className="cart-container">
+  //       <h1>Please log in to add items to cart</h1>
+  //     </div>
+  //   );
+  // }
 
   const updateHandler = async (e, item) => {
     const itemData = {

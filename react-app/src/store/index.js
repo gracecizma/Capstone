@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   session,
   products: productsReducer,
   reviews: reviewsReducer,
-  carts: cartReducer
+  cart: cartReducer
 });
 
 
