@@ -13,7 +13,8 @@ Gracefully baked is an e-commerce site that lists all my favorite baked goods fo
 
 - Flask
 - SQLAlchemy
-- React
+- React/Redux
+- Python
 
 ### Installation & Development
 
